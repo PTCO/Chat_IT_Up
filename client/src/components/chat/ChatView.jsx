@@ -14,13 +14,13 @@ const ChatView = () => {
     const [ reload , setReload ] = useState(false);
 
     const deleteMessage = async (Time) => {
-        await axios.delete(`http://localhost:4000/Sessions/DeleteMessage/${authUser.User_ID}/${Time}`)
+        await axios.delete(`${process.env.REACT_SERVER_URL}/DeleteMessage/${authUser.User_ID}/${Time}`)
         .then( () => setReload(pre => !pre))
     }
 
     const sendMessage = async (e, message) => {
         e.preventDefault();
-        await axios.post('http://localhost:4000/Sessions/NewMessage', {Message: message, Session_ID: session.Session_ID, Username: session.Username, UserID: authUser.User_ID, yourUsername: authUser.Username})
+        await axios.post(`${process.env.REACT_SERVER_URL}/Sessions/NewMessage`, {Message: message, Session_ID: session.Session_ID, Username: session.Username, UserID: authUser.User_ID, yourUsername: authUser.Username})
         .then( () => setReload(pre => !pre))
     }
 

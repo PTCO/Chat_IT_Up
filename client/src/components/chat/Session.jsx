@@ -12,12 +12,12 @@ const Session = ({reload, Session }) => {
     const [ notifications , setNotifications] = useState([]);
 
     const clearNotifications = async () => {
-        await axios.delete('http://localhost:4000/Sessions/Notifications/' + Session.Session_ID)
+        await axios.delete(`${process.env.REACT_SERVER_URL}/Sessions/Notifications/` + Session.Session_ID)
     } 
 
     useEffect(()=>{
         (async()=>{
-            await axios.get('http://localhost:4000/Sessions/Notifications/' + Session.Session_ID)
+            await axios.get(`${process.env.REACT_SERVER_URL}/Sessions/Notifications/` + Session.Session_ID)
             .then( result => setNotifications(result.data))
         })()
     }, [reload])
