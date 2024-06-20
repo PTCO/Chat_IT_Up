@@ -1,6 +1,6 @@
 // NPM Dependencies
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Sequelize
 const db  = require('../db');
@@ -151,7 +151,6 @@ Router.post('/SignIn', async(req, res, next)=>{
             throw error;
         }
 
-        console.log(userCheck)
 
         const unHash = await bcrypt.compareSync(formData.Password, userCheck.confirmedPassword);
 

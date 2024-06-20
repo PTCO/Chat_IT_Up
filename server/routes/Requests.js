@@ -3,10 +3,7 @@ const express = require('express');
 const Router = express.Router();
 
 const db = require('../db');
-const User = require('../db/models/User');
-const { where } = require('sequelize');
 const { ChatRequests , Users } = db.models;
-
 
 Users.hasMany(ChatRequests, { onDelete: 'CASCADE'})
 ChatRequests.belongsTo(Users, { onDelete: 'CASCADE'})
