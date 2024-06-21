@@ -10,7 +10,7 @@ const Gallery_Nav = ({ Options , URLs , Size , Orientation, Width }) => {
     }
 
     return (
-        <nav className="p-2 p-md-3 border border-3 rounded NavOuterContainer mt-auto" style={{width: Width}}>
+        <nav className="p-3 p-md-3 colorFullBorders rounded  mt-auto" style={{width: Width}}>
             <ul className={`d-flex ${Orientation === 'Vert' ? 'flex-column ' : ''} align-items-center justify-content-evenly NavInnerContianer`}>
                 {
                     Options.map( (icon, index) => 
