@@ -12,10 +12,10 @@ export const RequestProvider = (props) => {
 
     const updateRequests = async(data) => {
         if(data.Request === 'Accept') {
-            await axios.put(`${process.env.REACT_SERVER_URL}/Requests/Update`, {data})
+            await axios.put(`${process.env.REACT_APP_SERVER_URL}Requests/Update`, {data})
             await actions.createSession(data.Username, data.Requester_ID, data.Portrait, data.Request)
         }
-        await axios.put(`http://localhost:4000/Requests/Update`, {data})
+        await axios.put(`${process.env.REACT_APP_SERVER_URL}Requests/Update`, {data})
     }
 
     return (

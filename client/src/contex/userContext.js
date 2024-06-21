@@ -22,8 +22,7 @@ export const UserProvider = (props) => {
     }
 
     const signIn = async (data) => {
-        console.log(process.env.REACT_SERVER_URL)
-        await axios.post(`${process.env.REACT_SERVER_URL}User/SignIn`, {formData: data})
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}User/SignIn`, {formData: data})
         .then( result => {
             setAuthUser(result.data); 
             Cookie.set('authUser', JSON.stringify(result.data))
@@ -35,14 +34,14 @@ export const UserProvider = (props) => {
     }
 
     const signUp = async (data) => {
-        await axios.post(`${process.env.REACT_SERVER_URL}User/Signup`, {formData: data})
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Signup`, {formData: data})
         .then( result => {setAuthUser(result.data); navigate('/Chat')})
         .catch(errors => {
             handleErrors(errors);
         })
     }
     const updateProfile = async (request, data) => {
-        await axios.put(`${process.env.REACT_SERVER_URL}User/Update`, {request, User_ID: authUser.User_ID, formData: data})
+        await axios.put(`${process.env.REACT_APP_SERVER_URL}User/Update`, {request, User_ID: authUser.User_ID, formData: data})
         .then( result => {setAuthUser(result.data.User); setErrors(result.data.resultMsg)})
         .catch(errors => {
             handleErrors(errors);
@@ -50,7 +49,7 @@ export const UserProvider = (props) => {
     }
 
     const getUser = async() => {
-        await axios.get(`${process.env.REACT_SERVER_URL}User/Get/` + authUser.User_ID)
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}User/Get/` + authUser.User_ID)
         .then( result => setAuthUser(result.data));
     }
 

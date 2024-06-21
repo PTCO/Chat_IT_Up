@@ -25,7 +25,7 @@ export const SessionProvider = (props) => {
     }
 
     const getSessions = async () => {
-        await axios.get(`${process.env.REACT_SERVER_URL}/Sessions/` + authUser.User_ID)
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/` + authUser.User_ID)
         .then( result => { setSessions(result.data)})
         .catch( errors => {
             handleErrors(errors);
@@ -33,7 +33,7 @@ export const SessionProvider = (props) => {
     }
 
     const createSession = async(Username, UserTwoID, UserTwoPortrait, Request) => {
-        await axios.post(`${process.env.REACT_SERVER_URL}/Sessions/Create`, 
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}Sessions/Create`, 
         {
             UserTwoUsername: Username, 
             UserOneUsername: authUser.Username,
@@ -53,7 +53,7 @@ export const SessionProvider = (props) => {
     }
 
     const deleteSession = async(Session_ID)=> {
-        await axios.delete(`${process.env.REACT_SERVER_URL}/Sessions/Delete/${Session_ID}/${authUser.User_ID}`)
+        await axios.delete(`${process.env.REACT_APP_SERVER_URL}Sessions/Delete/${Session_ID}/${authUser.User_ID}`)
         .then(result => setSessions(result.data))
         .catch( errors => {
             handleErrors(errors);
@@ -63,7 +63,7 @@ export const SessionProvider = (props) => {
     const searchSession = async(e, search) => {
         e.preventDefault()
         if(!search) { setResults([]); setResultMsg("Please Enter A Username"); return}
-        await axios.get(`${process.env.REACT_SERVER_URL}/Sessions/Search/${search}/CurrentUser/${authUser.Username}/${authUser.User_ID}`)
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/Search/${search}/CurrentUser/${authUser.Username}/${authUser.User_ID}`)
         .then( result => {setResults(result.data.Users); setResultMsg(result.data.Message)})
         .catch( errors => {
             handleErrors(errors);
@@ -72,7 +72,7 @@ export const SessionProvider = (props) => {
 
     const getMessages = async () => {
         if(session && session.Session_ID !== undefined){
-            await axios.get(`${process.env.REACT_SERVER_URL}/Sessions/Messages/` + session.Session_ID)
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/Messages/` + session.Session_ID)
             .then( result => {setSession(result.data.session); setMessages(result.data.messages);})
             .catch( error => handleErrors(error))
         }
