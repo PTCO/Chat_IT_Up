@@ -24,7 +24,7 @@ const About = () => {
                 <Link className="text-white rounded" to={"https://www.facebook.com/profile.php?id=61559539658958"}>
                     <i class="fa-brands fa-facebook fs-1 p-2"></i>
                 </Link>
-                <Link className="btn bg-white border-0" to={"https://www.facebook.com/profile.php?id=61559539658958"}>
+                <Link className="btn bg-white border-0 ms-2" to={"https://www.facebook.com/profile.php?id=61559539658958"}>
                     <p className="m-0 ms-2">Connect with us on Facebook</p>
                 </Link>
             </div>
@@ -32,7 +32,7 @@ const About = () => {
                 <Link className="bg-dark text-white rounded" to={"https://x.com/BrandonDurand16"}>
                     <i class="fa-brands fa-twitter fs-1 p-2"></i>
                 </Link>
-                <Link className="btn bg-white border-0" to={"https://x.com/BrandonDurand16"}>
+                <Link className="btn bg-white border-0 ms-2" to={"https://x.com/BrandonDurand16"}>
                     <p className="m-0 ms-2">Connect with us on Twitter / X</p>
                 </Link>
             </div>
@@ -40,7 +40,7 @@ const About = () => {
                 <Link className="text-white rounded aboutContactLinks" to={"mailto:ptco.dev@gmail.com"}>
                     <i className="fa-solid fa-envelope fs-1 p-2"></i>
                 </Link>
-                <Link className="btn bg-white border-0" to={"mailto:ptco.dev@gmail.com"}>
+                <Link className="btn bg-white border-0 ms-2" to={"mailto:ptco.dev@gmail.com"}>
                     <p className="m-0 ms-2">Connect with us through Mail</p>
                 </Link>
             </div>
