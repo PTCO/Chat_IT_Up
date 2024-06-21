@@ -29,7 +29,7 @@ const Session = ({reload, Session }) => {
             <div className='d-flex p-2 rounded mb-1 align-items-center colorFullBorders justify-content-between border border-2' onClick={ e => {clearNotifications(); actions.setSession(Session); actions.getMessages()}} >
                 <Link className={`d-flex align-items-center ${!darkMode ? 'bg-white':'bg-transparent'} w-100`}  to={'/Chat/Session'}>
                     <img src={ Session.Portrait } alt="" className="userPortrait rounded-circle me-2"/>
-                    <h1 className="fs-3 mb-0">{ Session.Username }</h1>
+                    <h1 className={`fs-3 mb-0 ${darkMode ? 'text-white':null}`}>{ Session.Username }</h1>
                 </Link>
                 <p className={`${notifications.length === 0 ? 'd-none':null} m-0 ms-auto me-3 bg-dark text-white  p-2 px-3 rounded-circle`}>{notifications.length ? notifications.length:0}</p>
                 <i className="fa-solid fa-ellipsis-vertical fa-2x border p-2 rounded" onClick={ e => setSubNav(pre => !pre)}></i>
