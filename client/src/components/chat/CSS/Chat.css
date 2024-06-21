@@ -73,9 +73,8 @@ a:focus{
 }
 
 .userPortrait{
-    min-width: 65px;
-    max-width: 65px !important;
-    min-height: 3em !important;
+    width: 65px !important;
+    height: 4em !important;
 }
 
 .userChangePortrait{

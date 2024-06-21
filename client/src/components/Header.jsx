@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import UserContext from "../contex/userContext";
-import { act, useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import ThemeContext from "../contex/themeContext";
 import Logo from '../images/ChatItUp.png'
 
@@ -9,6 +9,10 @@ const Header = () => {
     const { accentColor, darkMode} = useContext(ThemeContext);
     
     const location = useLocation();
+
+    useEffect(()=>{
+        actions.getUser();
+    }, [])
 
     return (
         <header style={{backgroundColor: `${accentColor}`}} className={`${location.pathname.includes('/Chat/Session') ? 'd-none':'d-flex '} align-items-center justify-content-between py-2 py-md-4 px-2 mb-3`}>

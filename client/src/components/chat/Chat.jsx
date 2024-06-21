@@ -5,8 +5,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Navigation from './Navigation'
 
 import { Outlet, Route, Routes, useParams } from 'react-router-dom';
-import SessionContext from '../../contex/sessionContext';
-import UserContext from '../../contex/userContext';
 
 function Chat() {
     return (
