@@ -31,9 +31,10 @@ app.use(expressSession({
   secret: process.env.SECRET,
   store: sessionStore,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     httpOnly: false,
+    secure: true,
     maxAge: 7*24*60*60*1000
   }
 }));
