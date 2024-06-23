@@ -30,7 +30,7 @@ const sessionStore = new SequelizeStore({
 app.use(expressSession({
   secret: process.env.SECRET,
   store: sessionStore,
-  resave: true,
+  resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: false,
