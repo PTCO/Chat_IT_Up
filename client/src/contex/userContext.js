@@ -21,8 +21,7 @@ export const UserProvider = (props) => {
     }
     
     useEffect(()=>{
-        if(!Cookie.get('connect.sid')) return 
-        Cookie.set('uxsxc', JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.'))
+        if(!Cookie.get('uxsxc')) return 
         const session = JSON.stringify(Cookie.get('uxsxc')).substring(3).split('.');
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session})
         .then( result => {
@@ -47,6 +46,9 @@ export const UserProvider = (props) => {
         .catch( errors => {
             console.log(errors);
             handleErrors(errors);
+        })
+        .finally(()=>{
+            Cookie.set('uxsxc', JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.'))
         })
     }
 
