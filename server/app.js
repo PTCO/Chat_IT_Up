@@ -15,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
+  origin: 'https://chatitup.vercel.app',
   credentials: true
 }));
 
@@ -46,10 +47,6 @@ const requestsRouter = require('./routes/Requests');
     await db.sequelize.sync();
 })()
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
 
 app.use('/Sessions', sessionRouter);
 app.use('/User', userRouter);
