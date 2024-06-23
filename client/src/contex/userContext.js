@@ -35,7 +35,7 @@ export const UserProvider = (props) => {
             navigate('/Chat')
         })
         )();
-    }, [])
+    }, [authUser])
     
 
     const signIn = async (data) => {
