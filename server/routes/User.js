@@ -161,7 +161,14 @@ Router.post('/SignIn', async(req, res, next)=>{
         if(unHash) {
             req.session.userid = userCheck.User_ID;
             req.session.save();
-            res.status(201).send(userCheck)
+            
+            let x = await UserSessions.findAll();
+            const ses = x.map((val)=>{
+                if(JSON.parse(val.dataValues.data).userid === userCheck.User_ID){
+                    return val.dataValues.sid
+                }
+            })
+            res.status(201).send({user:userCheck, sid: ses[0]})
         }
         else {
             error.message = ['Incorrect password'];

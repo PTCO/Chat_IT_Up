@@ -40,17 +40,13 @@ export const UserProvider = (props) => {
     const signIn = async (data) => {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}User/SignIn`, {formData: data})
         .then( result => {
-            setAuthUser(result.data); 
+            setAuthUser(result.data.user); 
+            Cookie.set('uxsxc', result.data.sid)
             navigate('/Chat');
         })
         .catch( errors => {
             console.log(errors);
             handleErrors(errors);
-        })
-        .finally(()=>{
-            setInterval(() => {
-                Cookie.set('uxsxc', JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.'))
-            }, 2000);
         })
     }
 
