@@ -36,9 +36,8 @@ app.use(expressSession({
   cookie: {
     httpOnly: false,
     secure: true,
-    sameSite: 'none',
+    sameSite: 'lax',
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxAge: 7*24*60*60*1000
   }
 }));
 sessionStore.sync();
