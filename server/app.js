@@ -32,8 +32,11 @@ app.use(expressSession({
   store: sessionStore,
   resave: false,
   saveUninitialized: false,
+  proxy: true,
   cookie: {
     httpOnly: false,
+    secure: true,
+    sameSite: 'none',
     maxAge: 7*24*60*60*1000
   }
 }));
