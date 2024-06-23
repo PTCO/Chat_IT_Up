@@ -48,7 +48,9 @@ export const UserProvider = (props) => {
             handleErrors(errors);
         })
         .finally(()=>{
-            Cookie.set('uxsxc', JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.'))
+            setInterval(() => {
+                Cookie.set('uxsxc', JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.'))
+            }, 2000);
         })
     }
 
