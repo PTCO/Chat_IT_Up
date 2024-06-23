@@ -34,6 +34,7 @@ app.use(expressSession({
   saveUninitialized: false,
   cookie: {
     httpOnly: false,
+    sameSite: 'none',
     maxAge: 7*24*60*60*1000
   }
 }));
