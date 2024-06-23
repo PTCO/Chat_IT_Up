@@ -1,7 +1,6 @@
 // NPM Dependencies
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const cookie = require('js-cookie')
 
 // Sequelize
 const db  = require('../db');
@@ -162,14 +161,7 @@ Router.post('/SignIn', async(req, res, next)=>{
         if(unHash) {
             req.session.userid = userCheck.User_ID;
             req.session.save();
-            let x = await UserSessions.findAll();
-            const ses = x.map((val)=>{
-                if(JSON.parse(val.dataValues.data).userid === userCheck.User_ID){
-                    return val.dataValues.sid
-                }
-            })
-            cookie.set('uxcxs', ses[0]);
-            res.status(201).send(userCheck);
+            res.status(201).send(userCheck)
         }
         else {
             error.message = ['Incorrect password'];
