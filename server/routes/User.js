@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 // Sequelize
 const db  = require('../db');
-const { Users , ChatRequests , Sessions } = db.models
+const { Users , ChatRequests , Sessions, UserSessions } = db.models
 
 // Passport
 const passport = require('passport');
@@ -14,14 +14,11 @@ const passportScope = {
 
 // Middleware
 const { updateValidator } = require('../middleware/updateUserValidator'); 
-const User = require('../db/models/User');
-const { where } = require('sequelize');
-
-// const { google } = require('./middleware')
+const sessionValidator = require('../middleware/sessionValidator');
 
 const Router = express.Router();
 
-Router.get('/Get/:userid', async(req, res, next)=>{
+Router.get('/Get/:userid', sessionValidator, async(req, res, next)=>{
     try {
         const user = await Users.findOne({where: { User_ID: req.params.userid}, include: { model: ChatRequests}});
         res.status(201).send(user);
@@ -105,6 +102,16 @@ Router.put('/Update', updateValidator, async(req, res, next)=>{
     }
 })
 
+Router.post('/Check', async(req, res, next)=>{
+    try {
+        const session = await UserSessions.findOne({ where: { sid: req.body.session}});
+        const userID = JSON.parse(session.dataValues.data).userid;
+        const user = await Users.findByPk(userID);
+        res.status(201).send(user);
+    } catch (error) {
+        next(error);
+    }
+})
 
 Router.post('/Signup', async(req, res, next)=>{
     try {
@@ -145,20 +152,30 @@ Router.post('/SignIn', async(req, res, next)=>{
         }
 
         const userCheck = await Users.findOne({ where: { Username: formData.Username}, include: {model: ChatRequests}});
-
         if(!userCheck) {
             error.message = ['Incorrect username'];
             throw error;
         }
 
-
         const unHash = await bcrypt.compareSync(formData.Password, userCheck.confirmedPassword);
-
-        if(unHash) res.status(201).send(userCheck)
+        if(unHash) {
+            req.session.userid = userCheck.User_ID;
+            req.session.save();
+            res.status(201).send(userCheck)
+        }
         else {
             error.message = ['Incorrect password'];
             throw error;
         }
+    } catch (error) {
+        next(error);
+    }
+})
+
+Router.get('/LogOut/:userid', async(req, res)=>{
+    try {
+        req.session.destroy();
+        res.status(205).send('User Has been logged out');
     } catch (error) {
         next(error);
     }

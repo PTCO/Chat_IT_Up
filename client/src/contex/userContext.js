@@ -6,13 +6,12 @@ import Cookie from 'js-cookie';
 const UserContext = createContext();
 
 export const UserProvider = (props) => {
-    const cookie = Cookie.get('authUser');
-    const [ authUser , setAuthUser] = useState(cookie ? JSON.parse(cookie):null);
-    
+    axios.defaults.withCredentials = true;
+
+    const [ authUser , setAuthUser] = useState(null);
     const [ errors , setErrors ] = useState([]);
-
-    const navigate = useNavigate()
-
+    
+    const navigate = useNavigate();
     const handleErrors = (errors) => {
         if(errors.response.status === 400 || errors.response.status === 400){
             setErrors(errors.response.data)
@@ -20,15 +19,32 @@ export const UserProvider = (props) => {
             navigate('/error')
         }
     }
+    
+    useEffect(()=>{
+        if(!Cookie.get('connect.sid')) return 
+        const session = JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.');
+        (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session})
+        .then( result => {
+            setAuthUser(result.data);
+        })
+        .catch(errors => {
+            handleErrors(errors);
+        })
+        .finally( () => {
+            navigate('/Chat')
+        })
+        )();
+    }, [])
+    
 
     const signIn = async (data) => {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}User/SignIn`, {formData: data})
         .then( result => {
             setAuthUser(result.data); 
-            Cookie.set('authUser', JSON.stringify(result.data))
             navigate('/Chat');
         })
         .catch( errors => {
+            console.log(errors);
             handleErrors(errors);
         })
     }
@@ -49,13 +65,24 @@ export const UserProvider = (props) => {
     }
 
     const getUser = async() => {
+        if(!authUser) return
         await axios.get(`${process.env.REACT_APP_SERVER_URL}User/Get/` + authUser.User_ID)
-        .then( result => setAuthUser(result.data));
+        .then( result => setAuthUser(result.data))
+        .catch(errors => {
+            handleErrors(errors);
+        })
     }
 
-    const signOut = () => {
-        setAuthUser(null);
-        navigate('/SignIn')
+    const signOut = async () => {
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}User/LogOut/` + authUser.User_ID)
+        .then( () => {
+            setAuthUser(null);
+            Cookie.remove('connect.sid')
+            navigate('/SignIn')
+        })
+        .catch(errors => {
+            handleErrors(errors);
+        })
     }
 
     return (

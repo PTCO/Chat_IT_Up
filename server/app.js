@@ -2,19 +2,45 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 
+const expressSession = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(expressSession.Store);
+
 require('dotenv').config();
 
-const sessionRouter = require('./routes/Sessions');
-const userRouter = require('./routes/User');
-const requestsRouter = require('./routes/Requests');
+
 const db = require('./db')
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+  origin: 'https://chatitup.vercel.app',
+  credentials: true
+}));
 
+const sessionStore = new SequelizeStore({
+  db: db.sequelize,
+  tableName: 'UserSessions',
+  checkExpirationInterval: 15 * 60 * 1000,
+  expiration: 24 * 60 *60 * 1000
+});
+
+app.use(expressSession({
+  secret: process.env.SECRET,
+  store: sessionStore,
+  resave: true,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: false,
+    maxAge: 7*24*60*60*1000
+  }
+}));
+sessionStore.sync();
+
+const sessionRouter = require('./routes/Sessions');
+const userRouter = require('./routes/User');
+const requestsRouter = require('./routes/Requests');
 
 (async()=>{
     await db.sequelize.sync();

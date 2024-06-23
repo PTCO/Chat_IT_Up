@@ -13,7 +13,7 @@ import AuthRoute from './components/AuthRoute';
 import Settings from './components/chat/Settings';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import SessionContext from './contex/sessionContext';
 import Change_Username from './components/chat/Change_Username';
 import Change_Email from './components/chat/Change_Email';
@@ -28,11 +28,10 @@ import PrivateAccount_Page_Help from './components/chat/Settings/Help/PrivateAcc
 import ChatView_Page_Help from './components/chat/Settings/Help/ChatView_Page_Help';
 import Chat_Stopped from './components/chat/Chat_Stopped';
 import About from './components/chat/About';
-// import Change_Password from './components/chat/Change_Username';
+import Account from './components/chat/Account';
 
 function App() {
   const { sessions } = useContext(SessionContext)
-
   return (
     <div className="App">
       <Header />
@@ -65,6 +64,7 @@ function App() {
               <Route path='ChatViewPage' element={<ChatView_Page_Help />}/>
             </Route>
             <Route path='About' element={<About />}/>
+            <Route path='Account' element={<Account />}/>
           </Route>
           <Route path='/Chat/Session' element={<div className='px-4'><ChatView /></div>} />    
         </Route>

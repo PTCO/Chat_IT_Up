@@ -25,7 +25,8 @@ export const SessionProvider = (props) => {
     }
 
     const getSessions = async () => {
-        await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/` + authUser.User_ID)
+        // await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/` + authUser.User_ID)
+        await axios.get(`http://localhost:4000/Sessions/` + authUser.User_ID)
         .then( result => { setSessions(result.data)})
         .catch( errors => {
             handleErrors(errors);

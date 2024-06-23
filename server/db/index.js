@@ -16,5 +16,6 @@ db.models.Messages = require('./models/Message.js')(sequelize);
 db.models.Sessions = require('./models/Sessions.js')(sequelize);
 db.models.ChatRequests = require('./models/ChatRequest.js')(sequelize);
 db.models.Notification = require('./models/Notification.js')(sequelize);
+db.models.UserSessions = require('./models/UserSessions.js')(sequelize);
 
 module.exports = db;
