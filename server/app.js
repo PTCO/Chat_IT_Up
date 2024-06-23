@@ -15,9 +15,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  origin: 'https://chatitup-production.up.railway.app',
+  origin: ['https://chatitup-production.up.railway.app', 'https://chatitup.vercel.app'],
   credentials: true
 }));
+
+app.all('*', function(req, res, next) {
+  const origin = cors.origin.includes(req.header('origin').toLowerCase()) ? req.headers.origin : cors.default;
+  res.header("Access-Control-Allow-Origin", origin);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const sessionStore = new SequelizeStore({
   db: db.sequelize,
