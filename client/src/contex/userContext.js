@@ -42,6 +42,7 @@ export const UserProvider = (props) => {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}User/SignIn`, {formData: data})
         .then( result => {
             setAuthUser(result.data); 
+            Cookie.set('uxsxc', JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.'))
             navigate('/Chat');
         })
         .catch( errors => {
