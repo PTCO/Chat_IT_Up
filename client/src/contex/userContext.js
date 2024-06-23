@@ -22,6 +22,7 @@ export const UserProvider = (props) => {
     
     useEffect(()=>{
         if(!Cookie.get('uxsxc')) return 
+        Cookie.set('uxsxc', JSON.stringify(Cookie.get('uxsxc')).substring(3).split('.'))
         const session = JSON.stringify(Cookie.get('uxsxc')).substring(3).split('.');
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session})
         .then( result => {
@@ -40,8 +41,7 @@ export const UserProvider = (props) => {
     const signIn = async (data) => {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}User/SignIn`, {formData: data})
         .then( result => {
-            setAuthUser(result.data.user); 
-            Cookie.set('uxsxc', result.data.sid)
+            setAuthUser(result.data); 
             navigate('/Chat');
         })
         .catch( errors => {
