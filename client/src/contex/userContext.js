@@ -25,13 +25,13 @@ export const UserProvider = (props) => {
         const session = JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.');
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session}, {withCredentials: true})
         .then( result => {
+            Cookie.set("uxcxs", JSON.stringify(result.data.User_ID))
             setAuthUser(result.data);
         })
         .catch(errors => {
             handleErrors(errors);
         })
         .finally( () => {
-            Cookie.set("uxcxs", JSON.stringify(authUser.User_ID))
             navigate('/Chat')
         })
         )();
