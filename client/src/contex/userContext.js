@@ -8,8 +8,7 @@ const UserContext = createContext();
 export const UserProvider = (props) => {
     axios.defaults.withCredentials = true;
 
-    const cookie = Cookie.get('connect.sid')
-    console.log(cookie)
+   
 
     const [ authUser , setAuthUser] = useState(null);
     const [ errors , setErrors ] = useState([]);
@@ -23,10 +22,13 @@ export const UserProvider = (props) => {
             navigate('/error')
         }
     }
+
+    setInterval(() => {
+        setSess(Cookie.get('connect.sid'));
+    }, 2000);
     
     useEffect(()=>{
         if(!Cookie.get('connect.sid')) return 
-        console.log('ues')
         const session = JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.');
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session}, {withCredentials: true})
         .then( result => {
