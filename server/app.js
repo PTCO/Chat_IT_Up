@@ -34,7 +34,7 @@ app.use(expressSession({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: 'None',
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
