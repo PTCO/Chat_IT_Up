@@ -19,10 +19,6 @@ export const UserProvider = (props) => {
             navigate('/error')
         }
     }
-
-    const checkForConnect = () => {
-        console.log(document.cookie)
-    }
     
     useEffect(()=>{
         if(!Cookie.get('connect.sid')) return 
@@ -50,11 +46,6 @@ export const UserProvider = (props) => {
         })
         .catch( errors => {
             handleErrors(errors);
-        })
-        .finally(()=>{
-            setTimeout(() => {
-                checkForConnect();
-            }, 2000);
         })
     }
 

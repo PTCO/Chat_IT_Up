@@ -7,6 +7,9 @@ import Navigation from './Navigation'
 import { Outlet, Route, Routes, useParams } from 'react-router-dom';
 
 function Chat() {
+    useEffect(()=>{
+        console.log(Cookie.get('connect.sid'))
+    }, [])
     return (
         <div className='d-flex flex-column align-items-center chat'>
             <div className='d-flex justify-content-center'>
