@@ -1,6 +1,7 @@
 // NPM Dependencies
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const cookie = require('js-cookie');
 
 // Sequelize
 const db  = require('../db');
@@ -16,6 +17,7 @@ const passportScope = {
 const { updateValidator } = require('../middleware/updateUserValidator'); 
 const sessionValidator = require('../middleware/sessionValidator');
 const { Cookie } = require('express-session');
+const { path } = require('../app');
 
 const Router = express.Router();
 
@@ -163,7 +165,7 @@ Router.post('/SignIn', async(req, res, next)=>{
             req.session.userid = userCheck.User_ID;
             req.session.save();
 
-            Cookie.set('uxcxs', userCheck.User_ID)
+            cookie.set('uxcxs', userCheck.User_ID, {path: '/', secure: true, expires: 365, sameSite: 'None'})
 
             res.status(201).send(userCheck)
         }
