@@ -19,10 +19,6 @@ export const UserProvider = (props) => {
             navigate('/error')
         }
     }
-
-    setInterval(() => {
-        console.log(Cookie.get('connect.sid'));
-    }, 2000);
     
     useEffect(()=>{
         if(!Cookie.get('connect.sid')) return 
@@ -38,7 +34,7 @@ export const UserProvider = (props) => {
             navigate('/Chat')
         })
         )();
-    }, [sess])
+    }, [authUser])
     
 
     const signIn = async (data) => {
