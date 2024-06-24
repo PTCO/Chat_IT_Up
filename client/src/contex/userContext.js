@@ -9,6 +9,7 @@ export const UserProvider = (props) => {
     axios.defaults.withCredentials = true;
 
     const cookie = Cookie.get('connect.sid')
+    console.log(cookie)
 
     const [ authUser , setAuthUser] = useState(null);
     const [ errors , setErrors ] = useState([]);
