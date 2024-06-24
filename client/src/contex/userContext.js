@@ -8,8 +8,11 @@ const UserContext = createContext();
 export const UserProvider = (props) => {
     axios.defaults.withCredentials = true;
 
+    const cookie = Cookie.get('connect.sid')
+
     const [ authUser , setAuthUser] = useState(null);
     const [ errors , setErrors ] = useState([]);
+    const [ sess, setSess ] = useState(cookie ? JSON.parse(cookie):null)
     
     const navigate = useNavigate();
     const handleErrors = (errors) => {
@@ -22,6 +25,7 @@ export const UserProvider = (props) => {
     
     useEffect(()=>{
         if(!Cookie.get('connect.sid')) return 
+        console.log('ues')
         const session = JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.');
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session}, {withCredentials: true})
         .then( result => {
@@ -34,7 +38,7 @@ export const UserProvider = (props) => {
             navigate('/Chat')
         })
         )();
-    }, [])
+    }, [sess])
     
 
     const signIn = async (data) => {
@@ -45,11 +49,6 @@ export const UserProvider = (props) => {
         })
         .catch( errors => {
             handleErrors(errors);
-        })
-        .finally(()=>{
-            setTimeout(() => {
-                Cookie.set("userSession", JSON.stringify({s:JSON.stringify(Cookie.get('connect.sid'))}), {secure: true, sameSite: 'None', expires: 7 * 24 * 60 * 60 * 1000})
-            }, 2000);
         })
     }
 
