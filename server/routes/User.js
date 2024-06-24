@@ -165,7 +165,7 @@ Router.post('/SignIn', async(req, res, next)=>{
             req.session.userid = userCheck.User_ID;
             req.session.save();
 
-            cookie.set('uxcxs', userCheck.User_ID, {path: '/', secure: true, expires: 365, sameSite: 'None'})
+            cookie.set('uxcxs', userCheck.User_ID, {path: '/', secure: true,  domain: "chatitup-production.up.railway.app", expires: 365, sameSite: 'None'})
 
             res.status(201).send(userCheck)
         }
