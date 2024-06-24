@@ -33,8 +33,10 @@ app.use(expressSession({
   store: sessionStore,
   resave: false,
   saveUninitialized: true,
+  proxy: true,
   cookie: {
     httpOnly: false,
+    path: "/",
     secure: true,
     sameSite: 'None',
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
