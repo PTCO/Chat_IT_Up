@@ -164,7 +164,8 @@ Router.post('/SignIn', async(req, res, next)=>{
         if(unHash) {
             req.session.userid = userCheck.User_ID;
             req.session.save();
-            res.status(201).send(userCheck)
+            const cookies = await UserSessions.findAll();
+            res.status(201).send({user:userCheck, sess: cookies[cookies.length - 1]})
         }
         else {
             error.message = ['Incorrect password'];
