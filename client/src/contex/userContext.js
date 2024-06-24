@@ -44,7 +44,6 @@ export const UserProvider = (props) => {
             navigate('/Chat');
         })
         .catch( errors => {
-            console.log(errors);
             handleErrors(errors);
         })
     }
@@ -66,7 +65,7 @@ export const UserProvider = (props) => {
 
     const getUser = async() => {
         if(!authUser) return
-        await axios.get(`${process.env.REACT_APP_SERVER_URL}User/Get/` + authUser.User_ID)
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}User/Get/` + authUser.User_ID, {withCredentials: true})
         .then( result => setAuthUser(result.data))
         .catch(errors => {
             handleErrors(errors);

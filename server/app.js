@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
   origin: 'https://chatitup.vercel.app',
+  // origin: 'http://localhost:3000',
   credentials: true
 }));
 
@@ -35,7 +36,7 @@ app.use(expressSession({
   saveUninitialized: false,
   cookie: {
     httpOnly: false,
-    secure: true,
+    // secure: true,
     sameSite: 'Strict',
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
   }

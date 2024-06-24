@@ -18,7 +18,6 @@ const Sessions = () => {
     useEffect(()=>{
         (async()=>{
             await actions.getSessions()
-            await actions.getUser();
             setRequestCount(pre => authUser.ChatRequests ? pre = authUser.ChatRequests.length: null)
         })()        
     }, [reload, requestCount])
