@@ -35,9 +35,9 @@ app.use(expressSession({
   saveUninitialized: false,
   proxy: true,
   cookie: {
-    httpOnly: false,
+    httpOnly: true,
     secure: true,
-    sameSite: 'None',
+    sameSite: 'Strict',
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
   }
 }));

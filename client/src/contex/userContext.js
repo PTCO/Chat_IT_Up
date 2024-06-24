@@ -21,7 +21,7 @@ export const UserProvider = (props) => {
     }
     
     useEffect(()=>{
-        if(!Cookie.get('connect.sid')) return 
+        if(!Cookie.get('usc')) return 
         const session = JSON.stringify(Cookie.get('connect.sid')).substring(3).split('.');
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session}, {withCredentials: true})
         .then( result => {
@@ -41,8 +41,7 @@ export const UserProvider = (props) => {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}User/SignIn`, {formData: data})
         .then( result => {
             setAuthUser(result.data.user);
-            console.log(result.data.sess); 
-            Cookie.set('usc', JSON.stringify(result.data.User_ID), {secure: true, sameSite: 'Strict', expires: 7 * 24 * 60 * 60 * 1000})
+            Cookie.set('usc', JSON.stringify(result.data.sess.sid), {secure: true, sameSite: 'Strict', expires: 7 * 24 * 60 * 60 * 1000})
             navigate('/Chat');
         })
         .catch( errors => {
