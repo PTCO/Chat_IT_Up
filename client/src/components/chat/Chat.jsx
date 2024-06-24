@@ -1,10 +1,11 @@
 import './CSS/Chat.css'
+import Cookie from 'js-cookie';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import Navigation from './Navigation'
 
-import { Outlet, Route, Routes, useParams } from 'react-router-dom';
+import { Outlet} from 'react-router-dom';
 
 function Chat() {
     useEffect(()=>{
