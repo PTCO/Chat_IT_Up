@@ -21,7 +21,7 @@ export const UserProvider = (props) => {
     }
 
     const checkForConnect = () => {
-        console.log(Cookie.get('connect.sid'))
+        console.log(document.cookie)
     }
     
     useEffect(()=>{
