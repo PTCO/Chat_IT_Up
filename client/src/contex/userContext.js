@@ -31,6 +31,7 @@ export const UserProvider = (props) => {
             handleErrors(errors);
         })
         .finally( () => {
+            Cookie.set("uxcxs", JSON.stringify(authUser.User_ID))
             navigate('/Chat')
         })
         )();
