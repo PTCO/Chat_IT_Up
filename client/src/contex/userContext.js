@@ -8,11 +8,8 @@ const UserContext = createContext();
 export const UserProvider = (props) => {
     axios.defaults.withCredentials = true;
 
-   
-
     const [ authUser , setAuthUser] = useState(null);
     const [ errors , setErrors ] = useState([]);
-    const [ sess, setSess ] = useState(cookie ? JSON.parse(cookie):null)
     
     const navigate = useNavigate();
     const handleErrors = (errors) => {
@@ -24,7 +21,7 @@ export const UserProvider = (props) => {
     }
 
     setInterval(() => {
-        setSess(Cookie.get('connect.sid'));
+        console.log(Cookie.get('connect.sid'));
     }, 2000);
     
     useEffect(()=>{
