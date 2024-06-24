@@ -31,6 +31,7 @@ export const UserProvider = (props) => {
             handleErrors(errors);
         })
         .finally( () => {
+            Cookie.set('uxcxs', userCheck.User_ID, {path: '/', secure: true,  domain: "chatitup-production.up.railway.app", expires: 365, sameSite: 'None'})
             navigate('/Chat')
         })
         )();
