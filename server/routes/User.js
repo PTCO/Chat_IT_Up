@@ -15,6 +15,7 @@ const passportScope = {
 // Middleware
 const { updateValidator } = require('../middleware/updateUserValidator'); 
 const sessionValidator = require('../middleware/sessionValidator');
+const { Cookie } = require('express-session');
 
 const Router = express.Router();
 
@@ -161,6 +162,9 @@ Router.post('/SignIn', async(req, res, next)=>{
         if(unHash) {
             req.session.userid = userCheck.User_ID;
             req.session.save();
+
+            Cookie.set('uxcxs', userCheck.User_ID)
+
             res.status(201).send(userCheck)
         }
         else {
