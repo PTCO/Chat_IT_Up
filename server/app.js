@@ -37,8 +37,7 @@ app.use(expressSession({
   cookie: {
     httpOnly: false,
     secure: true,
-    sameSite: 'None',
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    keys: process.env.KEYS
   }
 }));
 sessionStore.sync();
