@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useContext } from 'react'
 import ThemeContext from "../../contex/themeContext";
 import UserContext from "../../contex/userContext";
-import Logo from '../../images/ChatItUp.png'
+import Logo from '../../images/ChatItUp_transparent.png'
 
 const Header = () => {
     const { actions , authUser } = useContext(UserContext);
