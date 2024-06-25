@@ -1,10 +1,5 @@
-import './CSS/Chat.css'
-import Cookie from 'js-cookie';
-
-import React, { useEffect } from 'react';
-
-import Navigation from './Navigation'
-
+import React from 'react';
+import Navigation from '../Navgitation/Navigation'
 import { Outlet} from 'react-router-dom';
 
 function Chat() {

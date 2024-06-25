@@ -1,7 +1,7 @@
 // NPM Dependencies
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const cookie = require('js-cookie');
+const store = require('express-session').Store
 
 // Sequelize
 const db  = require('../db');
@@ -18,6 +18,7 @@ const { updateValidator } = require('../middleware/updateUserValidator');
 const sessionValidator = require('../middleware/sessionValidator');
 const { Cookie } = require('express-session');
 const { path } = require('../app');
+const { where } = require('sequelize');
 
 const Router = express.Router();
 
@@ -105,7 +106,7 @@ Router.put('/Update', updateValidator, async(req, res, next)=>{
     }
 })
 
-Router.post('/Check', async(req, res, next)=>{
+Router.post('/Check', sessionValidator, async(req, res, next)=>{
     try {
         const session = await UserSessions.findOne({ where: { sid: req.body.session}});
         const userID = JSON.parse(session.dataValues.data).userid;
@@ -164,8 +165,12 @@ Router.post('/SignIn', async(req, res, next)=>{
         if(unHash) {
             req.session.userid = userCheck.User_ID;
             req.session.save();
-            const cookies = await UserSessions.findAll();
-            res.status(201).send({user:userCheck, sess: cookies[cookies.length - 1]})
+            let cookies;
+            setTimeout(async () => {
+                cookies = await UserSessions.findAll(); 
+                res.status(201).send({user:userCheck, sess: cookies[cookies.length - 1]})
+            }, 2000);
+           
         }
         else {
             error.message = ['Incorrect password'];
@@ -176,9 +181,10 @@ Router.post('/SignIn', async(req, res, next)=>{
     }
 })
 
-Router.get('/LogOut/:userid', async(req, res)=>{
+Router.get('/LogOut/:sid', async(req, res , next)=>{
     try {
         req.session.destroy();
+        await UserSessions.destroy({ where: { sid: req.params.sid }})
         res.status(205).send('User Has been logged out');
     } catch (error) {
         next(error);

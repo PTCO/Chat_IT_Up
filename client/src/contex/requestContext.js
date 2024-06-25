@@ -1,5 +1,4 @@
 import axios from "axios";
-import UserContext from "./userContext";
 import SessionContext from "./sessionContext";
 
 const { createContext, useContext } = require("react");

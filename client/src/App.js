@@ -1,34 +1,60 @@
-import logo from './logo.svg';
-import Header from './components/Header';
-import UserSignUp from './components/UserSignUp'
-import UserSignIn from './components/UserSignIn'
-import Chat from './components/chat/Chat'
-import New_Chat from './components/chat/New_Chat'
-import NotFound from './components/NotFound'
-import Sessions from './components/chat/Sessions'
-import ChatView from './components/chat/ChatView'
-import Customize from './components/chat/Customize';
-import Security from './components/chat/Security';
-import AuthRoute from './components/AuthRoute';
-import Settings from './components/chat/Settings';
-import './App.css';
+// React
 import { Route, Routes } from 'react-router-dom';
 import React, { useContext, useState } from 'react';
+
+// CSS
+import './css/App.css';
+
+// Context API
 import SessionContext from './contex/sessionContext';
-import Change_Username from './components/chat/Change_Username';
-import Change_Email from './components/chat/Change_Email';
-import Change_Password from './components/chat/Change_Password';
-import Privacy_Settings from './components/chat/Privacy_Settings';
-import Chat_Requests from './components/chat/Chat_Requests';
-import Help from './components/chat/Help';
-import Search_Page_Help from './components/chat/Settings/Help/Search_Page_Help';
-import Chat_Page_Help from './components/chat/Settings/Help/Chat_Page_Help';
-import Requests_Page_Help from './components/chat/Settings/Help/Requests_Page_Help';
-import PrivateAccount_Page_Help from './components/chat/Settings/Help/PrivateAccount_Page_Help';
-import ChatView_Page_Help from './components/chat/Settings/Help/ChatView_Page_Help';
-import Chat_Stopped from './components/chat/Chat_Stopped';
-import About from './components/chat/About';
-import Account from './components/chat/Account';
+
+// Structure
+import Header from './components/Structure/Header';
+
+// SignUp & SignIn
+import UserSignUp from './components/Credentials/UserSignUp'
+import UserSignIn from './components/Credentials/UserSignIn'
+
+// Auth Route
+import AuthRoute from './components/Credentials/AuthRoute';
+
+// Chat Home
+import Chat from './components/Chat/Chat'
+
+// Search
+import New_Chat from './components/Chat/Search/New_Chat'
+
+// Chat Sessions
+import Sessions from './components/Chat/Sessions/Sessions'
+
+// Chat View
+import ChatView from './components/Chat/ChatView/ChatView'
+
+// Chat Requests
+import Chat_Requests from './components/Chat/Requests/Chat_Requests';
+
+// Errors
+import NotFound from './components/Errors/NotFound'
+import Chat_Stopped from './components/Errors/Chat_Stopped';
+
+// Settings
+import Account from './components/Settings/Account/Account';
+import About from './components/Settings/About/About';
+import Customize from './components/Settings/Customize/Customize';
+import Security from './components/Settings/Security/Security';
+import Settings from './components/Settings/Settings';
+import Change_Username from './components/Settings/Security/Change_Username';
+import Change_Email from './components/Settings/Security/Change_Email';
+import Change_Password from './components/Settings/Security/Change_Password';
+import Privacy_Settings from './components/Settings/Privacy/Privacy_Settings';
+
+// Help
+import Help from './components/Settings/Help/Help';
+import Search_Page_Help from './components/Settings/Help/Search_Page_Help';
+import Chat_Page_Help from './components/Settings/Help/Chat_Page_Help';
+import Requests_Page_Help from './components/Settings/Help/Requests_Page_Help';
+import PrivateAccount_Page_Help from './components/Settings/Help/PrivateAccount_Page_Help';
+import ChatView_Page_Help from './components/Settings/Help/ChatView_Page_Help';
 
 function App() {
   const { sessions } = useContext(SessionContext)

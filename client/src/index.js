@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import './css/index.css';
 import { UserProvider } from './contex/userContext';
 import { SessionProvider } from './contex/sessionContext';
 import { BrowserRouter } from 'react-router-dom';

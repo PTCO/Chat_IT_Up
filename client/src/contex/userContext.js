@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Cookie from 'js-cookie';
 
 const UserContext = createContext();
@@ -8,21 +8,28 @@ const UserContext = createContext();
 export const UserProvider = (props) => {
     axios.defaults.withCredentials = true;
 
+    const location = useLocation();
+
     const [ authUser , setAuthUser] = useState(null);
     const [ errors , setErrors ] = useState([]);
     
     const navigate = useNavigate();
+    
     const handleErrors = (errors) => {
         if(errors.response.status === 400 || errors.response.status === 400){
             setErrors(errors.response.data)
-        } else {
+        } 
+        else if(errors.response.status === 205) {
+            navigate('/SignIn')
+        }
+        else {
             navigate('/error')
         }
     }
     
     useEffect(()=>{
         if(!Cookie.get('usc')) return 
-        const session = JSON.stringify(Cookie.get('usc')).substring(3).split('.');
+        const session = JSON.stringify(Cookie.get('usc')).substring(3, 35);
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session}, {withCredentials: true})
         .then( result => {
             setAuthUser(result.data);
@@ -30,11 +37,11 @@ export const UserProvider = (props) => {
         .catch(errors => {
             handleErrors(errors);
         })
-        .finally( () => {
-            navigate('/Chat')
+        .finally(()=>{
+            navigate(location.pathname);
         })
         )();
-    }, [authUser])
+    }, [])
     
 
     const signIn = async (data) => {
@@ -45,6 +52,7 @@ export const UserProvider = (props) => {
             navigate('/Chat');
         })
         .catch( errors => {
+            console.log(errors)
             handleErrors(errors);
         })
     }
@@ -57,27 +65,29 @@ export const UserProvider = (props) => {
         })
     }
     const updateProfile = async (request, data) => {
-        await axios.put(`${process.env.REACT_APP_SERVER_URL}User/Update`, {request, User_ID: authUser.User_ID, formData: data})
+        await axios.put(`${process.env.REACT_APP_SERVER_URL}User/Update`, {request, User_ID: authUser.User_ID, formData: data}, {withCredentials: true})
         .then( result => {setAuthUser(result.data.User); setErrors(result.data.resultMsg)})
         .catch(errors => {
             handleErrors(errors);
         })
     }
 
-    const getUser = async() => {
+    const refreshRequests = async() => {
         if(!authUser) return
         await axios.get(`${process.env.REACT_APP_SERVER_URL}User/Get/` + authUser.User_ID, {withCredentials: true})
-        .then( result => setAuthUser(result.data))
+        .then( result => {
+            setAuthUser(result.data)
+        })
         .catch(errors => {
             handleErrors(errors);
         })
     }
 
     const signOut = async () => {
-        await axios.get(`${process.env.REACT_APP_SERVER_URL}User/LogOut/` + authUser.User_ID)
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}User/LogOut/` + JSON.stringify(Cookie.get('usc')).substring(3, 35))
         .then( () => {
             setAuthUser(null);
-            Cookie.remove('connect.sid')
+            Cookie.remove('usc')
             navigate('/SignIn')
         })
         .catch(errors => {
@@ -97,7 +107,7 @@ export const UserProvider = (props) => {
                 updateProfile,
                 setErrors,
                 setAuthUser,
-                getUser
+                refreshRequests
             }
 
         }}>

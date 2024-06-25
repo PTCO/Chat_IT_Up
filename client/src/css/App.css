@@ -1,0 +1,258 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+header  li{
+  font-size: 1rem !important;
+}
+
+h1, h2, h3, h4, h5, h6, legend{
+    font-family: Lobster Two;
+}
+
+header {
+    height: 81px;
+    background-color: rgb(180 128 251);
+}
+
+label, p , input, li{
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+input:focus{
+    outline: none;
+    border-color: rgb(180 128 251) !important;
+}
+
+input {
+    color: #f8b231 !important;
+}
+
+.form-control:focus {
+    /* default B5 color or set your own color*/
+    border-color: #111 !important;
+    /* if you want to remove borders at all*/
+    box-shadow: none !important;
+}
+
+button, a{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    background: #f8b231 !important;
+    border-color: #f8b231 !important;
+}
+
+nav a {
+    background: none !important;
+}
+
+.headerBtn {
+    background: #212529 !important;
+    border-color: #212529 !important;
+}
+
+.refreshBtn:hover {
+    cursor: pointer;
+    background: rgb(180 128 251) !important;
+    border-color: rgb(180 128 251) !important;
+    color: white !important;
+}
+
+a:focus{
+    background-color: none;
+}
+
+.aboutContactLinks{
+    background: #b480fb !important;
+}
+
+.logo{
+    width: 4em;
+}
+
+.about p{
+    font-size: 1.13em !important;
+}
+
+.errorMsg, .colorFullBorders {
+    border-top: 2px solid #f8b231 !important;
+    border-left: 2px solid #f8b231 !important;
+    border-right: 2px solid rgb(180 128 251) !important;
+    border-bottom: 2px solid rgb(180 128 251) !important;
+}
+
+.userPortrait{
+    width: 65px !important;
+    height: 4em !important;
+}
+
+.userChangePortrait{
+    min-width: 50px;
+    max-width: 70px !important;
+    min-height: 2.5em !important; 
+}
+
+.requestPortrait{
+    min-width: 40px;
+    max-width: 45px !important;
+    min-height: 2.75em !important;
+}
+
+.helpInfo{
+    height: fit-content;
+}
+
+.helpInfo p {
+    margin-bottom: 0;
+}
+
+.helpInfo img {
+    width: 93%;
+}
+
+.helpQuestions a { color: white !important;}
+.helpQuestions li {
+    padding: .25rem;
+    border: 1px solid #111;
+    margin-bottom: .75rem;
+    border-radius: var(--bs-border-radius) !important; 
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.message-border {
+    border: 3px solid;
+}
+
+.dark{
+    background-color: #5a5a5a !important;
+    transition: all .75s ease-in;
+}
+
+.boxShadow{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+}
+
+.messagesContainer{
+    height: 78vh;
+    overflow-y: auto;
+}
+
+.messageTime{
+    font: .8rem !important;
+}
+
+.chatRequestContainer{
+    height: 38vh !important;
+}
+
+.chat {
+    height: 100vh;
+}
+a{
+    text-decoration: none;
+    color: #111 ;
+}
+
+/* Change Input Highlight Settings */
+.SearchField:focus{
+    box-shadow:  0px 0px 10px red !important;
+    border-color: black !important;
+    background: white !important;
+}
+/* Change Search Button */
+.SearchField + button:hover{
+    opacity: 1 !important;
+    background: red !important;
+    border-color: red !important;
+    color: white !important;
+}
+
+/* Change Search Results Container */
+.SeachResults{
+    border-color: red !important;
+}
+
+.User{
+    width: 5em;
+    height: 5em;
+}
+
+/* Change Nav Icons */
+.NavIcons{
+    color: white !important;
+    font-size: 1.25em;
+}
+@media (min-width: 765px){
+    .NavIcons{
+        font-size: 2em;
+    }
+}
+
+/* Change  */
+
+/* Change Outer Nav */
+.NavOuterContainer{
+    border-color: #111 !important;
+}
+
+/* Default Styles - Suggested Not To Change */
+.NavInnerContianer{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+@media (min-width: 516px) {
+    .Portrait{
+        min-width: 3.5em;
+        min-height: 3.5em;
+    }
+}
+
+@media (min-width: 1024px) {
+    .chat, .settings{
+        margin: 0 auto !important;
+        max-width: 50% !important;
+    }
+}
+
+@media (min-width: 765px){
+  header li{
+    font-size:  1.5rem !important;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
