@@ -36,6 +36,7 @@ import Chat_Requests from './components/Chat/Requests/Chat_Requests';
 // Errors
 import NotFound from './components/Errors/NotFound'
 import Chat_Stopped from './components/Errors/Chat_Stopped';
+import Loading from './components/Errors/Loading';
 
 // Settings
 import Account from './components/Settings/Account/Account';
@@ -96,6 +97,7 @@ function App() {
         </Route>
         <Route path='/' element={<UserSignIn />}/>
         <Route path='*' element={<NotFound />}/>
+        <Route path='/Loading' element={<Loading />}/>
       </Routes>
     </div>
   );

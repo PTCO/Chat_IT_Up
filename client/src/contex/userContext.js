@@ -38,7 +38,10 @@ export const UserProvider = (props) => {
             handleErrors(errors);
         })
         .finally(()=>{
-            navigate(location.pathname);
+            navigate('/Loading')
+            setTimeout(() => {
+                navigate(location.pathname);
+            }, 2000);
         })
         )();
     }, [])
