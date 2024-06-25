@@ -33,12 +33,12 @@ export const UserProvider = (props) => {
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session}, {withCredentials: true})
         .then( result => {
             setAuthUser(result.data);
+            navigate('/Loading')
         })
         .catch(errors => {
             handleErrors(errors);
         })
         .finally(()=>{
-            navigate('/Loading')
             setTimeout(() => {
                 navigate(location.pathname);
             }, 2000);
