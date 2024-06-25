@@ -19,7 +19,7 @@ import UserSignIn from './components/Credentials/UserSignIn'
 import AuthRoute from './components/Credentials/AuthRoute';
 
 // Chat Home
-import Chat from './components/Chat/Chat'
+import Chat from './components/Chat/Chats'
 
 // Search
 import New_Chat from './components/Chat/Search/New_Chat'
