@@ -28,12 +28,12 @@ export const UserProvider = (props) => {
     }
     
     useEffect(()=>{
-        if(!Cookie.get('usc')) return 
+        if(!Cookie.get('usc')) return
+        navigate('/Loading') 
         const session = JSON.stringify(Cookie.get('usc')).substring(3, 35);
         (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session}, {withCredentials: true})
         .then( result => {
             setAuthUser(result.data);
-            navigate('/Loading')
         })
         .catch(errors => {
             handleErrors(errors);
