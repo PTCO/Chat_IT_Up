@@ -231,11 +231,6 @@ a{
     color: white !important;
     font-size: 1.25em;
 }
-@media (min-width: 765px){
-    .NavIcons{
-        font-size: 2em;
-    }
-}
 
 /* Change  */
 
@@ -336,6 +331,9 @@ a{
   }
   button {
     font-size: .75em !important;
+  }
+  .NavIcons {
+    font-size: 1.25em;
   }
 }
 
