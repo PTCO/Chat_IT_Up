@@ -8,7 +8,7 @@ const UserSignUp = () => {
         if(authUser) actions.navigate('/Chat') 
     }, [])
     return (
-        <div className="row justify-content-center">
+        <div className="row justify-content-center signUpIn">
             <CustomForm 
                 legend={"Sign Up"}
                 inputs={[

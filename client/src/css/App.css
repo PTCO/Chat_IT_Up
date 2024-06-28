@@ -330,6 +330,9 @@ a{
   header li{
     font-size:  1.5rem !important;
   }
+  .signUpIn {
+    width: 75% !important;
+  }
 }
 
 @keyframes App-logo-spin {
