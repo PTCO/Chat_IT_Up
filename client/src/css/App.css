@@ -68,7 +68,7 @@ button, a{
 }
 
 button {
-    font-size: .8em !important;
+    font-size: .85em !important;
 }
 
 nav a {
@@ -332,6 +332,10 @@ a{
   }
   .signUpIn {
     width: 75% !important;
+    margin:  0 auto !important;
+  }
+  button {
+    font-size: .75em !important;
   }
 }
 
