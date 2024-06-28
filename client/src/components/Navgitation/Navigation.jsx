@@ -1,6 +1,5 @@
 import React from 'react';
 import Option from './Option';
-import './CSS/Navigation.css'
 
 const Gallery_Nav = ({ Options , URLs , Size , Orientation, Width }) => {
     const handleNavigation = (path) => {

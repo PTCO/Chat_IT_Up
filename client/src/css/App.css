@@ -333,7 +333,7 @@ a{
     font-size: .75em !important;
   }
   .NavIcons {
-    font-size: 1.25em;
+    font-size: 1.25em !important;
   }
 }
 
