@@ -21,7 +21,7 @@ const Settings = () => {
             <Link to={"Security"} className="btn btn-dark text-white w-100 mb-3 py-3 d-flex align-items-center justify-content-center">Security<i className="fa-solid fa-fingerprint fs-4 ms-2"></i></Link>
             <Link to={"Privacy"} className="btn btn-dark text-white w-100 mb-3 py-3 d-flex align-items-center justify-content-center">Privacy<i className="fa-solid fa-mask fs-4 ms-2"></i></Link>
             <Link to={"Help"} className="btn btn-dark text-white w-100 mb-3 py-3 d-flex align-items-center justify-content-center">Help<i className="fa-solid fa-circle-question fs-4 ms-2"></i></Link>
-            <Link to={"Account"} className="btn btn-dark text-white w-100 mb-3 py-3 d-flex align-items-center justify-content-center">Account<i class="fa-solid fa-address-card fs-4 ms-2"></i></Link>
+            <Link to={"Account"} className="btn btn-dark text-white w-100 mb-3 py-3 d-flex align-items-center justify-content-center">Account<i className="fa-solid fa-address-card fs-4 ms-2"></i></Link>
             <Link to={"About"} className="btn btn-dark text-white w-100 mb-3 py-3 d-flex align-items-center justify-content-center">About<i className="fa-solid fa-circle-info fs-4 ms-2"></i></Link>
         </div>
         <div className="d-flex flex-column align-items-center settings px-4">

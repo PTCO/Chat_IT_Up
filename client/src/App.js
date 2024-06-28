@@ -48,6 +48,7 @@ import Change_Username from './components/Settings/Security/Change_Username';
 import Change_Email from './components/Settings/Security/Change_Email';
 import Change_Password from './components/Settings/Security/Change_Password';
 import Privacy_Settings from './components/Settings/Privacy/Privacy_Settings';
+import Account_Deletetion from './components/Errors/Account_Deletetion';
 
 // Help
 import Help from './components/Settings/Help/Help';
@@ -98,6 +99,7 @@ function App() {
         <Route path='/' element={<UserSignIn />}/>
         <Route path='*' element={<NotFound />}/>
         <Route path='/Loading' element={<Loading />}/>
+        <Route path='/Deletion' element={<Account_Deletetion />}/>
       </Routes>
     </div>
   );

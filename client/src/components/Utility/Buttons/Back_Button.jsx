@@ -7,7 +7,7 @@ const Back_Button = () => {
     const navigate = useNavigate()
     const location = useLocation();
     return (
-        <span className={`${location.pathname === '/Chat/Settings' ? 'd-none':'d-flex'} justify-content-end w-100 border-bottom border-2 pb-2 mb-2`}>
+        <span className={`${location.pathname === '/Chat/Settings' ? 'd-none':'d-flex'} justify-content-end w-100 border-bottom border-2 pb-2 mb-1`}>
             <button className="btn btn-dark" onClick={ e => {navigate(-1); actions.setErrors([])}}>Back</button>
         </span>
     )

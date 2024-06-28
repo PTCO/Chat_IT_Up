@@ -10,7 +10,7 @@ const Searched_User = ({Portrait, Username, User_ID, isPrivate, isRequested}) =>
             { isRequested ? 
             <p className="bg-dark text-white p-1 border rounded  fs-5 ms-auto  me-1 mb-0">Requested</p>
             :
-            <button className="btn btn-dark ms-auto fs-5 p-1 me-1" onClick={e => actions.createSession(Username, User_ID, Portrait, 'Added') }>{!isPrivate ? 'Add':'Request'}</button>
+            <button className="btn btn-dark ms-auto  p-1 me-1" onClick={e => actions.createSession(Username, User_ID, Portrait, 'Added') }>{!isPrivate ? 'Add':'Request'}</button>
             }
         </div>
     )

@@ -1,7 +1,6 @@
 // NPM Dependencies
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const store = require('express-session').Store
 
 // Sequelize
 const db  = require('../db');
@@ -16,9 +15,6 @@ const passportScope = {
 // Middleware
 const { updateValidator } = require('../middleware/updateUserValidator'); 
 const sessionValidator = require('../middleware/sessionValidator');
-const { Cookie } = require('express-session');
-const { path } = require('../app');
-const { where } = require('sequelize');
 
 const Router = express.Router();
 
@@ -106,7 +102,7 @@ Router.put('/Update', updateValidator, async(req, res, next)=>{
     }
 })
 
-Router.post('/Check', sessionValidator, async(req, res, next)=>{
+Router.post('/Check', async(req, res, next)=>{
     try {
         const session = await UserSessions.findOne({ where: { sid: req.body.session}});
         const userID = JSON.parse(session.dataValues.data).userid;
@@ -138,7 +134,12 @@ Router.post('/Signup', async(req, res, next)=>{
             Password: formData.Password,
             confirmedPassword: formData.confirmedPassword,
         })
-        res.status(201).send(user)
+        req.session.userid = user.User_ID;
+        req.session.save();
+        setTimeout(async () => {
+            let cookies = await UserSessions.findAll(); 
+            res.status(201).send({user:user, sess: cookies[cookies.length - 1]})
+        }, 2000);
     } catch (error) {
         next(error);
     }
@@ -163,14 +164,21 @@ Router.post('/SignIn', async(req, res, next)=>{
 
         const unHash = await bcrypt.compareSync(formData.Password, userCheck.confirmedPassword);
         if(unHash) {
-            req.session.userid = userCheck.User_ID;
-            req.session.save();
-            let cookies;
-            setTimeout(async () => {
-                cookies = await UserSessions.findAll(); 
-                res.status(201).send({user:userCheck, sess: cookies[cookies.length - 1]})
-            }, 2000);
-           
+            const sessions = await UserSessions.findAll();
+            const ck = sessions.map( sess => JSON.parse(sess.data).userid);
+            if(!ck.includes(userCheck.User_ID)) {
+                req.session.userid = userCheck.User_ID;
+                req.session.save();
+                setTimeout(async () => {
+                    let cookies = await UserSessions.findAll(); 
+                    res.status(201).send({user:userCheck, sess: cookies[cookies.length - 1]})
+                }, 2000);
+                return;
+            } 
+            const sessIndex = ck.findIndex((cookie)=> {
+                return cookie.indexOf(ck.includes(userCheck.User_ID));
+            })
+            res.status(201).send({user:userCheck, sess: sessions[sessIndex]})
         }
         else {
             error.message = ['Incorrect password'];
@@ -186,6 +194,17 @@ Router.get('/LogOut/:sid', async(req, res , next)=>{
         req.session.destroy();
         await UserSessions.destroy({ where: { sid: req.params.sid }})
         res.status(205).send('User Has been logged out');
+    } catch (error) {
+        next(error);
+    }
+})
+
+Router.delete('/Delete/:userid/:sid', sessionValidator, async(req, res, next)=>{
+    try {
+        req.session.destroy();
+        await UserSessions.destroy({ where: { sid: req.params.sid }});
+        await Users.destroy({where: { User_ID: req.params.userid}});
+        res.status(201).end();
     } catch (error) {
         next(error);
     }

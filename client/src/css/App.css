@@ -67,6 +67,10 @@ button, a{
     border-color: #f8b231 !important;
 }
 
+button {
+    font-size: .8em !important;
+}
+
 nav a {
     background: none !important;
 }
@@ -96,9 +100,14 @@ a:focus{
 }
 
 .about p{
-    font-size: 1.13em !important;
+    font-size: .85em !important;
 }
-
+.about h2 {
+    font-size: 1.1em !important;
+}
+.about div {
+    margin: .25em 0 !important; 
+}
 .errorMsg, .colorFullBorders {
     border-top: 2px solid #f8b231 !important;
     border-left: 2px solid #f8b231 !important;
@@ -107,8 +116,8 @@ a:focus{
 }
 
 .userPortrait{
-    width: 65px !important;
-    height: 4em !important;
+    width: 50px !important;
+    height: 3em !important;
 }
 
 .userChangePortrait{
@@ -149,6 +158,7 @@ a:focus{
     border: 3px solid;
 }
 
+
 .dark{
     background-color: #5a5a5a !important;
     transition: all .75s ease-in;
@@ -167,8 +177,17 @@ a:focus{
     font: .8rem !important;
 }
 
+.deleteConsentForm{
+    overflow-y: scroll !important;
+    height: 31em !important;
+}
+
 .chatRequestContainer{
     height: 38vh !important;
+}
+
+.chatRequestList {
+    overflow-y: scroll;
 }
 
 .chat {
@@ -177,6 +196,18 @@ a:focus{
 a{
     text-decoration: none;
     color: #111 ;
+}
+
+.requestOptions{
+    flex-direction: column;
+    align-items: center;
+}
+.requestOptions button {
+    margin-left: 0 !important;
+}
+.requestOptions p {
+    font-size: .75em;
+    margin-bottom: .25em !important;
 }
 
 /* Change Input Highlight Settings */
@@ -219,6 +250,67 @@ a{
     padding: 0 !important;
 }
 
+
+@media (min-width: 410px) {
+    .requestOptions {
+        flex-direction: row !important;
+    }
+
+    .requestOptions button {
+        margin-left: .25em !important;
+    }
+
+    .requestOptions p {
+        font-size: 1em;
+        margin-bottom: 0 !important;
+    }
+
+    .refreshBtn{
+        padding: .5em !important;
+    }
+
+    .userPortrait{
+        width: 65px !important;
+        height: 4em !important;
+    }
+    h1{
+        font-size: 1.75em !important;
+    }
+    a {
+        font-size: 1.25em !important;
+    }
+    button {
+        font-size: 1.15em !important;
+    }
+    .about p {
+        font-size: 1em !important;
+        margin: .5em 0 !important;
+    }
+    .about div {
+        margin: .5em 0 !important;
+    }
+    .about h2 {
+        font-size: 1.5em !important;
+    }
+    .deleteConsentForm, .deleteConsentForm li{
+        font-size: 1.35em !important;
+    }
+    .deleteConsentForm li ,.deleteConsentForm h4, .deleteConsentForm p:nth-child(2), .deleteConsentForm h2 {
+        margin: .35em 0;
+    }
+    .deleteConsentForm button, .deleteConsentForm p:nth-child(1) {
+        font-size: .85em !important;
+    }
+    .deleteConsentForm h4{
+        font-size: 1.15em !important;
+    }
+    .deleteConsentForm p:nth-child(3){
+        font-size: .8em;
+    }
+    .deleteConsentForm h2 {
+        font-size: 1.55em !important;
+    }
+}
 
 @media (min-width: 516px) {
     .Portrait{

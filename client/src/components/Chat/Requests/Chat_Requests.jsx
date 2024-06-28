@@ -25,12 +25,12 @@ const Chat_Requests = () => {
         <div className="w-100 min-vh-100">
             <nav className="d-flex align-items-center justify-content-end w-100 mt-1">
                 <ul>
-                    <li className="btn p-0"><i className={`${darkMode ? 'text-white bg-dark':null} refreshBtn fa-solid fa-rotate border border-2 p-2 rounded`} onClick={ e => setReload(pre => !pre)}></i></li>
+                    <li className="btn p-0"><i className={`${darkMode ? 'text-white bg-dark':null} refreshBtn fa-solid fa-rotate border border-2 p-1 rounded`} onClick={ e => setReload(pre => !pre)}></i></li>
                 </ul>
             </nav>
             <div className={`${darkMode ? 'text-white':null} d-flex flex-column chatRequestContainer`}>
-                <h2 className="w-100 m-0 border-bottom border-2 text-start pb-2 fs-3">Sent Requests</h2>
-                <div className="d-flex flex-column  h-100">
+                <h2 className="w-100 m-0 border-bottom border-2 text-start pb-1 fs-3">Sent Requests</h2>
+                <div className="d-flex flex-column chatRequestList  h-100">
                     {authUser.ChatRequests ? authUser.ChatRequests.map( request => {
                         if(request.Requester_id === authUser.User_ID) {
                             return (
@@ -41,9 +41,9 @@ const Chat_Requests = () => {
                     ):null}
                 </div>
             </div>
-            <div className={`${darkMode ? 'text-white':null} d-flex flex-column chatRequestContainer`}>
-                <h2 className="w-100 m-0 border-bottom border-2 text-start pb-2 fs-3">Recieved Requests</h2>
-                <div className="d-flex flex-column h-100">
+            <div className={`${darkMode ? 'text-white':null} d-flex flex-column chatRequestContainer mt-1`}>
+                <h2 className="w-100 m-0 border-bottom border-2 text-start pb-1 fs-3">Recieved Requests</h2>
+                <div className="d-flex flex-column chatRequestList h-100">
                     {authUser.ChatRequests ? authUser.ChatRequests.map( request => {
                         if(request.Requester_id !== authUser.User_ID) {
                             return (
