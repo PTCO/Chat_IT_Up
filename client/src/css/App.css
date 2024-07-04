@@ -284,7 +284,7 @@ a{
         font-size: 1.25rem !important;
     }
     .pwdStrength {
-        font-size: 1rem !important;
+        font-size: .85rem !important;
     }
     footer small {
         font-size: .85em !important;
@@ -414,6 +414,7 @@ a{
         font-size: 1.35em !important;
     }
 }
+
 
 @media (max-height: 670px) {
     .chatMessageInput{
