@@ -12,15 +12,6 @@ form {
     width: fit-content;
 }
 
-label{
-    font-size: 1.5rem !important;
-}
-@media (min-width: 516px) {
-    label{
-        font-size: 1.75rem !important;
-    }
-}
-
 
 i {
     height: fit-content !important;

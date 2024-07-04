@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const { privateValidator } = require('../middleware/privateValidator')
+const { privateValidator } = require('../middleware/privateValidator');
+const { encrypt, decrypt } = require('node-encryption');
+const encryptionKey = 'mysecretkey1337';
 
 const db = require('../db');
 const { Op, where } = require('sequelize');
@@ -117,7 +119,9 @@ router.get('/Messages/:sessionid', async(req, res, next)=>{
             .then( (result) => {
                 let messages = [];
                 result.map( (message) => {
-                    messages.push(message.dataValues)
+                    let text = message.dataValues;
+                    text.Message = decrypt(message.Message, process.env.KEYS).toString();
+                    messages.push(text)
                 })
                 res.status(201).send({ session: session, messages: messages});
             })
@@ -184,11 +188,11 @@ router.post('/NewMessage', async(req, res, next)=>{
         const session = await Sessions.findOne({ where: { Session_ID: req.body.Session_ID}})
         const session2 = await Sessions.findOne({ where: { Username: req.body.yourUsername}})
         const message = await Messages.build({
-            Message: req.body.Message,
+            Message: encrypt(req.body.Message, process.env.KEYS),
             User_ID: req.body.UserID
         });
         const message2 = await Messages.build({
-            Message: req.body.Message,
+            Message: encrypt(req.body.Message, process.env.KEYS),
             User_ID: req.body.UserID
         });
         message.Time = message.sentAt();

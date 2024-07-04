@@ -33,8 +33,8 @@ const CustomForm =  ({ inputs , legend, button, Size}) => {
     }
 
     return (
-        <form onSubmit={ e => handleSubmit(e)} className={`d-flex flex-column p-2 ${Size === 'lg' ? 'formLG' : 'formSm'} mb-4 col-10 ${darkMode ? 'text-white':null}`}>
-            <legend className="display-4 border-bottom border-3 pb-1 mb-3">{ legend }</legend>
+        <form onSubmit={ e => handleSubmit(e)} className={`d-flex flex-column ${Size === 'lg' ? 'formLG' : 'formSm'} mb-2 col-10 ${darkMode ? 'text-white':null}`}>
+            <legend className="display-4 border-bottom border-3 pb-1">{ legend }</legend>
             { inputs.map( (input, index) => (
                 <FormInput
                     Size={Size} 
@@ -56,13 +56,13 @@ const CustomForm =  ({ inputs , legend, button, Size}) => {
                     key={btn.title} 
                     type={btn.type} 
                     onClick={ e => `${btn.path ? navigate(btn.path) : null}`} 
-                    className="btn fs-6 btn-dark mt-4 w-50 mx-2 me-md-2">
+                    className="btn btn-dark mt-3 w-50 me-md-2">
                     { btn.title }
                 </button>
             ))}
             </span>
             {errors.map( error => (
-                <h3 key={error} className="mt-4 border rounded p-1 errorMsg">{ error }</h3>
+                <h3 key={error} className={`${errors.length > 0} mt-4 border rounded p-1 errorMsg`}>{ error }</h3>
             ))}
         </form>
     )

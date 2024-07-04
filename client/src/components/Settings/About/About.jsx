@@ -9,15 +9,15 @@ const About = () => {
             <h2 className={`${darkMode ? 'bg-dark':null} colorFullBorders border border-2 p-1 rounded`}>About Us</h2>
             <div className="d-flex align-items-center mt-3 mb-3">
                 <p className="m-0 me-3 pe-3 border-end border-2 w-100 fs-5">Find <b>Users</b> to engage and chat about bfrivouslous, <b>fun</b>, unique and <b>intriguing</b> topics!</p>
-                <i className="fa-regular fa-comments fa-shake fa-2x ms-auto"></i>
+                <i className="fa-regular fa-comments fa-shake fa-2x ms-3"></i>
             </div>
             <div className="d-flex align-items-center mb-3">
                 <p className="m-0 me-3 pe-3 border-end border-2 w-100 fs-5">Maybe you don't find the <b>conversation</b> to your liking, that's fine <b>remove</b> or <b>stop</b> chatting to users deemed <b>unworthy</b> of a conversation and start up new ones!</p>
-                <i className="fa-solid fa-users-slash fa-beat fa-2x"></i>
+                <i className="fa-solid fa-users-slash fa-beat fa-2x ms-3"></i>
             </div>
             <div className="d-flex align-items-center">
                 <p className="m-0 me-3 pe-3 border-end border-2 w-100 fs-5">Don't like being hit up by <b>"undesired"</b>  individuals, set your account to <b>private</b> to avoid the unimporant convos!</p>
-                <i className="fa-solid fa-eye-low-vision fa-fade fa-2x"></i>
+                <i className="fa-solid fa-eye-low-vision fa-fade fa-2x ms-3"></i>
             </div>
             <h2 className={`${darkMode ? 'bg-dark':null} colorFullBorders border border-2 p-1 rounded m-0 mt-1 `}>Contact Us</h2>
             <div className="d-flex align-items-center pt-1">

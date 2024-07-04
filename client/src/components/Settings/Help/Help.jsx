@@ -7,8 +7,8 @@ const Help = () => {
 
     return (
         <div className="d-flex align-items-center flex-column w-100">
-            <nav className="w-100">
-                <h2 className={`${darkMode ? 'bg-dark text-white':null} border border-2 p-1 mt-2 mb-4 colorFullBorders rounded`}>Common Questions</h2>
+            <nav className="w-100 helpNav">
+                <h2 className={`${darkMode ? 'bg-dark text-white':null} border border-2 p-1 mt-2 mb-3 colorFullBorders rounded`}>Common Questions</h2>
                 <ul className="helpQuestions">
                     <li><Link to={"PrivatePage"}>How to see "Add & Chat" requests?</Link></li>
                     <li><Link to={"RequestsPage"}>How to "Decline" or "Accept" Chat requests?</Link></li>

@@ -10,6 +10,7 @@ import SessionContext from './contex/sessionContext';
 
 // Structure
 import Header from './components/Structure/Header';
+import Footer from './components/Structure/Footer';
 
 // SignUp & SignIn
 import UserSignUp from './components/Credentials/UserSignUp'
@@ -61,7 +62,7 @@ import ChatView_Page_Help from './components/Settings/Help/ChatView_Page_Help';
 function App() {
   const { sessions } = useContext(SessionContext)
   return (
-    <div className="App">
+    <div className="App h-100 d-flex flex-column">
       <Header />
       <Routes>
         <Route path='/SignUp' element={<UserSignUp />}/>
@@ -94,13 +95,14 @@ function App() {
             <Route path='About' element={<About />}/>
             <Route path='Account' element={<Account />}/>
           </Route>
-          <Route path='/Chat/Session' element={<div className='px-4'><ChatView /></div>} />    
+          <Route path='/Chat/Session' element={<div className='px-4 h-100'><ChatView /></div>} />    
         </Route>
         <Route path='/' element={<UserSignIn />}/>
         <Route path='*' element={<NotFound />}/>
         <Route path='/Loading' element={<Loading />}/>
         <Route path='/Deletion' element={<Account_Deletetion />}/>
       </Routes>
+      <Footer />
     </div>
   );
 }

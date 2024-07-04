@@ -34,9 +34,9 @@ const Header = () => {
                 <ul>
                     {
                         location.pathname === '/SignIn' ?
-                        <li onClick={ e => {actions.setErrors([""]); actions.navigate('/SignUp')}}><button className="btn btn-dark border border-2 headerBtn">Sign Up</button></li>
+                        <li onClick={ e => {actions.navigate('/SignUp')}}><button className="btn btn-dark border border-2 headerBtn">Sign Up</button></li>
                         :
-                        <li  onClick={ e => {actions.setErrors([""]); actions.navigate('/SignIn')}}><button className="btn btn-dark border border-2 headerBtn">Sign In</button></li>
+                        <li  onClick={ e => {actions.navigate('/SignIn')}}><button className="btn btn-dark border border-2 headerBtn">Sign In</button></li>
                     }
                 </ul>
                 }

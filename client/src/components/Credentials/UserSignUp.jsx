@@ -3,9 +3,9 @@ import CustomForm from '../Utility/Forms/CustomForm'
 import UserContext from '../../contex/userContext';
 
 const UserSignUp = () => {
-    const { authUser , actions } = useContext(UserContext);
+    const { authUser , actions} = useContext(UserContext);
     useEffect(()=>{
-        if(authUser) actions.navigate('/Chat') 
+        if(authUser) actions.navigate('/Chat')
     }, [])
     return (
         <div className="row justify-content-center signUpIn">
