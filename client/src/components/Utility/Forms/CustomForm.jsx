@@ -56,13 +56,13 @@ const CustomForm =  ({ inputs , legend, button, Size}) => {
                     key={btn.title} 
                     type={btn.type} 
                     onClick={ e => `${btn.path ? navigate(btn.path) : null}`} 
-                    className="btn btn-dark mt-3 w-50 me-md-2">
+                    className="btn btn-dark mt-2 w-50 me-md-2">
                     { btn.title }
                 </button>
             ))}
             </span>
             {errors.map( error => (
-                <h3 key={error} className={`${errors.length > 0} mt-4 border rounded p-1 errorMsg`}>{ error }</h3>
+                <h3 key={error} className={`${errors.length > 0} mt-2 mb-0 border rounded fs-6 errorMsg`}>{ error }</h3>
             ))}
         </form>
     )
