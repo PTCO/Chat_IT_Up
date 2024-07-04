@@ -10,7 +10,7 @@ const Header = () => {
     const location = useLocation();
 
     return (
-        <header style={{backgroundColor: `${accentColor}`}} className={`${location.pathname.includes('/Chat/Session') ? 'd-none':'d-flex '} align-items-center justify-content-between py-2 py-md-4 px-2 mb-2`}>
+        <header style={{backgroundColor: `${accentColor}`}} className={`${location.pathname.includes('/Chat/Session') ? 'd-none':'d-flex '} align-items-center justify-content-between py-1 py-md-4 px-2 mb-2`}>
             <span className={` ${ darkMode ? 'text-white':null} d-flex align-items-center`}>
                 {authUser ?
                 <>
