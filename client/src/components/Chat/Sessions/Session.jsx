@@ -25,7 +25,7 @@ const Session = ({reload, Session }) => {
 
     return (
         <>
-            <div className='d-flex p-2 session rounded mb-1 align-items-center colorFullBorders justify-content-between border border-2' onClick={ e => {clearNotifications(); actions.setSession(Session); actions.getMessages()}} >
+            <div className='d-flex p-1 session rounded mb-1 align-items-center colorFullBorders justify-content-between border border-2' onClick={ e => {clearNotifications(); actions.setSession(Session); actions.getMessages()}} >
                 <Link className={`d-flex align-items-center ${!darkMode ? 'bg-white':'bg-transparent'} w-100`}  to={'/Chat/Session'}>
                     <img src={ Session.Portrait } alt="" className="userPortrait rounded-circle me-2"/>
                     <h1 className={`mb-0 ${darkMode ? 'text-white':null}`}>{ Session.Username }</h1>
