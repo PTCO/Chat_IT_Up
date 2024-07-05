@@ -62,7 +62,7 @@ const CustomForm =  ({ inputs , legend, button, Size}) => {
             ))}
             </span>
             {errors.map( error => (
-                <h3 key={error} className={`${errors.length > 0} mt-2 mb-0 border rounded fs-6 errorMsg`} style={{padding: '.15em'}}>{ error }</h3>
+                <h3 key={error} className={`${errors.length > 0} mt-2 mb-0 border rounded fs-6 errorMsg`} style={{padding: '.15em'}}>{ error } <i className="fa-solid fa-circle-exclamation text-danger"></i></h3>
             ))}
         </form>
     )
