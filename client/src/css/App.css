@@ -425,13 +425,13 @@ a{
         height: 76vh;
     }
     .helpInfo {
-        height: 25em !important;
+        height: 27em !important;
     }
 }
 
 @media (min-height: 670px) {
     .helpInfo {
-        height: 30em !important;
+        height: 35em !important;
     }
 }
 
