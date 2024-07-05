@@ -202,7 +202,7 @@ a:focus{
 }
 
 .messagesContainer{
-    height: 78vh;
+    height: 75vh;
     overflow-y: auto;
 }
 
@@ -424,7 +424,7 @@ a{
         min-height: 78% !important;
     }
     .messagesContainer{
-        height: 74vh;
+        height: 76vh;
     }
 }
 
