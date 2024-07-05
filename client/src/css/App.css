@@ -431,7 +431,7 @@ a{
 
 @media (min-height: 670px) {
     .helpInfo {
-        height: 40em !important;
+        height: 30em !important;
     }
 }
 
