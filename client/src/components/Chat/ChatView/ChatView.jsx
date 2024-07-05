@@ -5,10 +5,13 @@ import Messages from './Messaging/Messages';
 import Message_Input from './Message_Input';
 import SessionContext from '../../../contex/sessionContext';
 import UserContext from '../../../contex/userContext';
+import { useParams } from 'react-router-dom';
 
 const ChatView = () => {
     const { actions , messages, session } = useContext(SessionContext)
     const { authUser } = useContext(UserContext);
+
+    const { sessionid } = useParams();
 
     const [ reload , setReload ] = useState(false);
 
@@ -25,7 +28,7 @@ const ChatView = () => {
 
     useEffect(()=>{
         (async()=>{
-            await actions.getMessages()
+            await actions.getMessages(sessionid)
         })()
     }, [reload, session, messages])
     setTimeout(() => {

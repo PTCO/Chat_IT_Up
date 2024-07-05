@@ -4,9 +4,9 @@ import refreshRequestsPhoto from './images/refreshRequests.png'
 
 const Requests_Page_Help = () => {
     return (
-        <div className="d-flex flex-column text-start overflow-auto" style={{ height: "40em"}}>
+        <div className="d-flex flex-column text-start helpInfo overflow-auto">
             <h1 className="border-bottom border-2 mb-2 pb-2 ">Request Page Help</h1>
-            <div className="d-flex flex-column  helpInfo overflow-auto">
+            <div className="d-flex flex-column">
                 <div>
                     <p>Click the <b>"Cancel"</b> option, to stop requesting to chat to the intended <b>"User</b>.</p>
                     <img src={chatRequestPhoto} alt="" className='mt-2'/>

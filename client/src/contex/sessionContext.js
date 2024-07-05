@@ -70,9 +70,9 @@ export const SessionProvider = (props) => {
         })
     }
 
-    const getMessages = async () => {
-        if(session && session.Session_ID !== undefined){
-            await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/Messages/` + session.Session_ID)
+    const getMessages = async (Session_ID) => {
+        if(Session_ID || session && session.Session_ID !== undefined){
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/Messages/${Session_ID ? Session_ID:session.Session_ID}`)
             .then( result => {setSession(result.data.session); setMessages(result.data.messages);})
             .catch( error => handleErrors(error))
         }

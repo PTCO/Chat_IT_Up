@@ -164,9 +164,7 @@ a:focus{
     min-height: 2.75em !important;
 }
 
-.helpInfo{
-    height: fit-content;
-}
+
 
 .helpInfo p {
     margin-bottom: 0;
@@ -425,6 +423,15 @@ a{
     }
     .messagesContainer{
         height: 76vh;
+    }
+    .helpInfo {
+        height: 31em;
+    }
+}
+
+@media (min-height: 670px) {
+    .helpInfo {
+        height: 44em;
     }
 }
 

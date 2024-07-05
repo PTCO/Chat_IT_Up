@@ -4,9 +4,9 @@ import requestUserPhoto from './images/User_Request.png'
 
 const Search_Page_Help = () => {
     return (
-        <div className="d-flex flex-column text-start overflow-auto" style={{ height: "40em"}}>
+        <div className="d-flex flex-column text-start helpInfo overflow-auto">
             <h1 className="border-bottom border-2 mb-2 pb-2 ">Search Page Help</h1>
-            <div className="d-flex flex-column  helpInfo">
+            <div className="d-flex flex-column  ">
                 <div>
                     <p>Enter a <b>Username</b> or characters to search for new <b>"Users"</b> to <b>"Add & Chat"</b> with. The most relevant or closest matched results will be returned.</p>
                     <img src={searchBarPhoto} alt="" />

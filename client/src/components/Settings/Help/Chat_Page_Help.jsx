@@ -5,9 +5,9 @@ import chatRequestAndSessionRefreshPhoto from './images/chatRequestAndSessionRef
 
 const Chat_Page_Help = () => {
     return (
-            <div className="d-flex flex-column text-start overflow-auto" style={{ height: "40em"}}>
+            <div className="d-flex flex-column text-start helpInfo overflow-auto">
                 <h1 className="border-bottom border-2  mb-2 pb-2 ">Chat Page Help</h1>
-                <div className="d-flex flex-column  helpInfo overflow-auto">
+                <div className="d-flex flex-column  ">
                     <div>
                         <p>Click on a <b>"Username"</b> or <b>"User</b> to open the <b>"Chat View"</b> to the chat's messages.</p>
                         <img src={chatSessionPhoto} alt="" />

@@ -78,7 +78,7 @@ const FormInput = ({ type, label, name, checkboxValues, radioValues, orientation
                 <div className={`${name === 'Password' && textInput && location.pathname === '/SignUp' ? null:'d-none'} mt-1 text-start p-2 pb-0 pwdStrength`} style={{fontSize: '.7rem'}}>
                     <span className="d-flex align-items-center border-bottom border-2 pb-2 mb-2">
                         <h3 className="m-0 me-2 border-end border-2 pe-2">Strength</h3>
-                        {strength.map(point => {return ( <i key={point} className={`${point !== 1 ? 'fa-regular':'fa-solid'} fa-circle fa-lg mx-1`} style={{color: 'rgb(180 128 251)'}}></i>)})}
+                        {strength.map((point, index) => {return ( <i key={index} className={`${point !== 1 ? 'fa-regular':'fa-solid'} fa-circle fa-lg mx-1`} style={{color: 'rgb(180 128 251)'}}></i>)})}
                         <p className="m-0 p-1 ms-2 border border-2 rounded">{strength.length <= 3 ? 'Weak':`${strength.length < 5 ? 'Moderate':'Strong'}`}</p>
                     </span>
                     <p>Password length between - <b className="p-1 rounded text-white" style={{backgroundColor: '#f8b231'}}>8-16 characters</b></p>

@@ -95,7 +95,7 @@ function App() {
             <Route path='About' element={<About />}/>
             <Route path='Account' element={<Account />}/>
           </Route>
-          <Route path='/Chat/Session' element={<div className='px-4 h-100'><ChatView /></div>} />    
+          <Route path={`/Chat/Session/:sessionid`} element={<div className='px-4 h-100'><ChatView /></div>} />    
         </Route>
         <Route path='/' element={<UserSignIn />}/>
         <Route path='*' element={<NotFound />}/>
