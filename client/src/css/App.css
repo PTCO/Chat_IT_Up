@@ -279,7 +279,7 @@ a{
 }
 
 
-@media (min-width: 410px) and (min-height: ) {
+@media (min-width: 410px) {
     label{
         font-size: 1.25rem !important;
     }
