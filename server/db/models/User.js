@@ -70,7 +70,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             set(val) {
                 if(val === this.Password && val){
-                    const hashPassword = bcrypt.hashSync(val, 10);
+                    const hashPassword = bcrypt.hashSync(val, parseInt(process.env.SALT));
                     this.setDataValue('confirmedPassword', hashPassword)
                 }
             },
