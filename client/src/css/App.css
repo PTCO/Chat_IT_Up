@@ -304,8 +304,8 @@ a{
         padding: .5em !important;
     }
     header .userPortrait{
-        width: 65px !important;
-        height: 3.75em !important;
+        width: 55px !important;
+        height: 3.25em !important;
     }
     header h1 {
         font-size: 1.75em !important;
@@ -313,6 +313,9 @@ a{
     .userPortrait {
         width: 50px !important;
         height: 3em !important;
+    }
+    .session .userPortrait {
+        height: 2.5em !important;
     }
     .session h1 {
         font-size: 1.25em !important;

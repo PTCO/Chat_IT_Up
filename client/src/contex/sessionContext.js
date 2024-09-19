@@ -16,19 +16,12 @@ export const SessionProvider = (props) => {
 
     const navigate = useNavigate();
     
-    const handleErrors = (errors) => {
-        if(errors.response.status === 400 || errors.response.status === 400){
-            navigate('/forbidden')
-        } else {
-            navigate('/error')
-        }
-    }
 
     const getSessions = async () => {
         await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/` + authUser.User_ID)
         .then( result => { setSessions(result.data)})
         .catch( errors => {
-            handleErrors(errors);
+            actions.handleErrors(errors);
         })
     }
 
@@ -48,7 +41,7 @@ export const SessionProvider = (props) => {
             else navigate('/Chat') 
         })
         .catch( errors => {
-            handleErrors(errors);
+            actions.handleErrors(errors);
         })
     }
 
@@ -56,7 +49,7 @@ export const SessionProvider = (props) => {
         await axios.delete(`${process.env.REACT_APP_SERVER_URL}Sessions/Delete/${Session_ID}/${authUser.User_ID}`)
         .then(result => setSessions(result.data))
         .catch( errors => {
-            handleErrors(errors);
+            actions.handleErrors(errors);
         })
     }
 
@@ -66,7 +59,7 @@ export const SessionProvider = (props) => {
         await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/Search/${search}/CurrentUser/${authUser.Username}/${authUser.User_ID}`)
         .then( result => {setResults(result.data.Users); setResultMsg(result.data.Message)})
         .catch( errors => {
-            handleErrors(errors);
+            actions.handleErrors(errors);
         })
     }
 
@@ -74,7 +67,7 @@ export const SessionProvider = (props) => {
         if(Session_ID || session && session.Session_ID !== undefined){
             await axios.get(`${process.env.REACT_APP_SERVER_URL}Sessions/Messages/${Session_ID ? Session_ID:session.Session_ID}`)
             .then( result => {setSession(result.data.session); setMessages(result.data.messages);})
-            .catch( error => handleErrors(error))
+            .catch( error => actions.handleErrors(error))
         }
     }
 

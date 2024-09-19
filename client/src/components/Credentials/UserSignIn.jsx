@@ -25,6 +25,7 @@ const UserSignUp = () => {
                 ]}
                 button={[{title: "Sign In", tpye: 'submit'}]}
                 Size={''}
+                Oauth={[{type: 'google', icon: 'square-google-plus'}, {type: 'twitter', icon: 'twitter'}]}
             />
         </div>
     )

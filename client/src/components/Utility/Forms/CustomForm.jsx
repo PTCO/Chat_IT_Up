@@ -6,7 +6,7 @@ import ThemeContext from "../../../contex/themeContext";
 
 import './CSS/Form.css'
 
-const CustomForm =  ({ inputs , legend, button, Size}) => {
+const CustomForm =  ({ inputs , legend, button, Size, Oauth}) => {
     const { actions  , errors } = useContext(UserContext);
     const { darkMode } = useContext(ThemeContext);
     const navigate = useNavigate();
@@ -60,6 +60,11 @@ const CustomForm =  ({ inputs , legend, button, Size}) => {
                     { btn.title }
                 </button>
             ))}
+            </span>
+            <span className={`${Oauth.length > 0 ? 'd-flex':'d-none'} align-items-center mt-2 m`}>
+                {Oauth.length > 0 && Oauth.map(auth => {
+                    return <a key={auth.icon} className="bg-white d-flex me-2  align-items-center " href={`${auth.type === 'google' ? `http://localhost:5000/User/Google`:`http://localhost:5000/User/Twitter`}`}><i className={`fa-brands fa-${auth.icon} fa-2x ${auth.type === 'google' ? 'text-danger':'text-info'}`}></i></a>
+                })}
             </span>
             {errors.map( error => (
                 <h3 key={error} className={`${errors.length > 0} mt-2 mb-0 border rounded fs-6 errorMsg`} style={{padding: '.15em'}}>{ error } <i className="fa-solid fa-circle-exclamation text-danger"></i></h3>

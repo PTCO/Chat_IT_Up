@@ -16,32 +16,37 @@ export const UserProvider = (props) => {
     const navigate = useNavigate();
     
     const handleErrors = (errors) => {
-        if(errors.response.status === 400 || errors.response.status === 400){
+        if(errors.response.status === 400){
             setErrors(errors.response.data)
         } 
         else if(errors.response.status === 205) {
             navigate('/SignIn')
         }
+        else if(errors.response.status === 401) {
+            Cookie.remove('usc')
+            navigate('/Unauthorized')
+        }
         else {
             navigate('/error')
         }
+    }
+
+    const userCheck = async () => {
+        const session = JSON.stringify(Cookie.get('usc')).substring(3, 35);
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session})
+        .then( result => {
+            setAuthUser(result.data);
+            navigate(location.pathname !== "/Chat" ? location.pathname:"/Chat")
+        })
+        .catch(errors => {
+            handleErrors(errors);
+        })
     }
     
     useEffect(()=>{
         if(!Cookie.get('usc')) return
         navigate('/Loading') 
-        const session = JSON.stringify(Cookie.get('usc')).substring(3, 35);
-        (async () => await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session})
-        .then( result => {
-            setAuthUser(result.data);
-        })
-        .catch(errors => {
-            handleErrors(errors);
-        })
-        .finally(()=>{
-            navigate(location.pathname);
-        })
-        )();
+        userCheck()
     }, [])
     
 
@@ -122,9 +127,11 @@ export const UserProvider = (props) => {
                 signUp,
                 navigate,
                 signOut,
+                handleErrors,
                 deleteUser,
                 updateProfile,
                 setErrors,
+                userCheck,
                 setAuthUser,
                 refreshRequests
             }

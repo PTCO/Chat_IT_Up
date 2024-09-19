@@ -87,6 +87,10 @@ module.exports = (sequelize) => {
         isRequested: {
             type: Sequelize.BOOLEAN,
             defaultValue: false
+        },
+        isGoogleAuth: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         }
     },{sequelize})
     return User;

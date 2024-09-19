@@ -8,8 +8,16 @@ const { Users , ChatRequests , Sessions, UserSessions } = db.models
 
 // Passport
 const passport = require('passport');
-const passportScope = {
-    scope: ['profile', 'email']
+const googleScope = {
+    scope: ['profile', 'email'],
+    session: false,
+    failureRedirect: "https://chatitup.vercel.app/SignIn"
+}
+
+const twitterScope = {
+    scope: ['users.read', 'offline.access'],
+    session: false,
+    failureRedirect: "https://chatitup.vercel.app/SignIn"
 }
 
 // Middleware
@@ -17,6 +25,34 @@ const { updateValidator } = require('../middleware/updateUserValidator');
 const sessionValidator = require('../middleware/sessionValidator');
 
 const Router = express.Router();
+
+// Cookie Session Validation
+const findCookie = async(req, res, user, authType) => {
+    const sessions = await UserSessions.findAll();
+    const ck = sessions.map( sess => JSON.parse(sess.data).userid);
+    if(!ck.includes(user.User_ID)) {
+        req.session.userid = user.User_ID;
+        req.session.save();
+
+        if(authType === 'Oauth') {
+            setTimeout(async () => {
+                const sessions = await UserSessions.findAll();
+                res.redirect(`http://localhost:3000/Oauth/${sessions[sessions.length - 1].sid}`)
+            }, 2000);
+            return;
+        }
+
+        setTimeout(async () => {
+            let cookies = await UserSessions.findAll(); 
+            res.status(201).send({user:user, sess: cookies[cookies.length - 1]})
+        }, 2000);
+        return;
+    } 
+    const sessIndex = ck.findIndex((cookie)=> {
+        return cookie.indexOf(ck.includes(user.User_ID));
+    })
+    res.status(201).send({user: user, sess: sessions[sessIndex]})
+}
 
 Router.get('/Get/:userid', sessionValidator, async(req, res, next)=>{
     try {
@@ -105,7 +141,10 @@ Router.put('/Update', updateValidator, async(req, res, next)=>{
 Router.post('/Check', async(req, res, next)=>{
     try {
         const session = await UserSessions.findOne({ where: { sid: req.body.session}});
-        const userID = JSON.parse(session.dataValues.data).userid;
+        if(!session) {
+            return res.status(401).end();
+        }
+        const userID = JSON.parse(session.data).userid;
         const user = await Users.findByPk(userID);
         res.status(201).send(user);
     } catch (error) {
@@ -134,12 +173,7 @@ Router.post('/Signup', async(req, res, next)=>{
             Password: formData.Password,
             confirmedPassword: formData.confirmedPassword,
         })
-        req.session.userid = user.User_ID;
-        req.session.save();
-        setTimeout(async () => {
-            let cookies = await UserSessions.findAll(); 
-            res.status(201).send({user:user, sess: cookies[cookies.length - 1]})
-        }, 2000);
+        findCookie(req, res, user)
     } catch (error) {
         next(error);
     }
@@ -164,21 +198,7 @@ Router.post('/SignIn', async(req, res, next)=>{
 
         const unHash = await bcrypt.compareSync(formData.Password, userCheck.confirmedPassword);
         if(unHash) {
-            const sessions = await UserSessions.findAll();
-            const ck = sessions.map( sess => JSON.parse(sess.data).userid);
-            if(!ck.includes(userCheck.User_ID)) {
-                req.session.userid = userCheck.User_ID;
-                req.session.save();
-                setTimeout(async () => {
-                    let cookies = await UserSessions.findAll(); 
-                    res.status(201).send({user:userCheck, sess: cookies[cookies.length - 1]})
-                }, 2000);
-                return;
-            } 
-            const sessIndex = ck.findIndex((cookie)=> {
-                return cookie.indexOf(ck.includes(userCheck.User_ID));
-            })
-            res.status(201).send({user:userCheck, sess: sessions[sessIndex]})
+            findCookie(req, res, userCheck)
         }
         else {
             error.message = ['Incorrect password'];
@@ -210,7 +230,22 @@ Router.delete('/Delete/:userid/:sid', sessionValidator, async(req, res, next)=>{
     }
 })
 
-Router.get('/Google', passport.authenticate("google", passportScope));
-Router.get('/Google/Redirect', passport.authenticate("google"));
+Router.get('/Google', passport.authenticate("google", googleScope));
+Router.get('/Google/Callback', passport.authenticate("google", googleScope), async (req, res, next)=> {
+    try {
+        findCookie(req, res, req.user, "Oauth");
+    } catch (error) {
+        next(error);
+    }
+});
+
+Router.get('/Twitter', passport.authenticate("twitter", twitterScope));
+Router.get('/Twitter/Callback', passport.authenticate("twitter", twitterScope), async (req, res, next)=> {
+    try {
+        findCookie(req, res, req.user, "Oauth");
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = Router;

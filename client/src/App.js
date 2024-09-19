@@ -17,7 +17,9 @@ import UserSignUp from './components/Credentials/UserSignUp'
 import UserSignIn from './components/Credentials/UserSignIn'
 
 // Auth Route
+import Oauth from './components/Credentials/Oauth';
 import AuthRoute from './components/Credentials/AuthRoute';
+import Unauthorized from './components/Errors/Unauthorized';
 
 // Chat Home
 import Chat from './components/Chat/Chats'
@@ -65,6 +67,7 @@ function App() {
     <div className="App h-100 d-flex flex-column">
       <Header />
       <Routes>
+        <Route path='/Oauth/:sid' element={<Oauth />}/>
         <Route path='/SignUp' element={<UserSignUp />}/>
         <Route path='/SignIn' element={<UserSignIn />}/> 
         <Route element={<AuthRoute />}>
@@ -99,6 +102,7 @@ function App() {
         </Route>
         <Route path='/' element={<UserSignIn />}/>
         <Route path='*' element={<NotFound />}/>
+        <Route path='/Unauthorized' element={<Unauthorized />}/>
         <Route path='/Loading' element={<Loading />}/>
         <Route path='/Deletion' element={<Account_Deletetion />}/>
       </Routes>

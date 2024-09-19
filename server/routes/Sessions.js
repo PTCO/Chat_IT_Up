@@ -8,7 +8,6 @@ const db = require('../db');
 const { Op, where } = require('sequelize');
 const { Users , Sessions , Messages , ChatRequests, Notification } = db.models;
 
-
 Users.hasMany(Sessions, {onDelete: 'CASCADE'});
 Sessions.belongsTo(Users, {onDelete: 'CASCADE'});
 
@@ -17,6 +16,7 @@ Messages.belongsTo(Sessions, {onDelete: 'CASCADE'});
 
 Sessions.hasMany(Notification, {onDelete: 'CASCADE'});
 Notification.belongsTo(Sessions, {onDelete: 'CASCADE'});
+
 
 router.get('/Search/:username/CurrentUser/:yourusername/:yourID', async(req, res, next)=>{
     try {
@@ -156,6 +156,8 @@ router.post('/Create', privateValidator, async(req, res, next)=>{
         next(error);
     }
 })
+
+
 
 router.delete('/Delete/:sessionid/:userid', async(req, res, next)=>{
     try {

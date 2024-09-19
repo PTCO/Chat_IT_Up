@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize)=> {
-    class Session extends Sequelize.Model{}
-    Session.init({
+    class Sessions extends Sequelize.Model{}
+    Sessions.init({
         Session_ID:{
             type: Sequelize.UUID,
             primaryKey: true,
@@ -17,5 +17,5 @@ module.exports = (sequelize)=> {
             allowNull: false
         }
     }, {sequelize});
-    return Session;
+    return Sessions;
 }

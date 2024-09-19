@@ -5,9 +5,10 @@ const cors = require('cors');
 const expressSession = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(expressSession.Store);
 
+const passport = require('passport');
+const passportSetup = require('./passport/config');
+
 require('dotenv').config();
-
-
 const db = require('./db')
 
 const app = express();
@@ -15,8 +16,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  origin: 'https://chatitup.vercel.app',
-  // origin: 'http://localhost:3000',
+  // origin: 'https://chatitup.vercel.app',
+  origin: 'http://localhost:3000',
   credentials: true
 }));
 
@@ -36,11 +37,14 @@ app.use(expressSession({
   proxy: true,
   cookie: {
     httpOnly: true,
-    secure: true,
+    secure: 'auto',
     sameSite: 'Strict',
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
   }
 }));
+
+app.use(passport.initialize());
+
 sessionStore.sync();
 
 const sessionRouter = require('./routes/Sessions');
