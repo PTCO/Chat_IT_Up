@@ -41,16 +41,24 @@ const findCookie = async(req, res, user, authType) => {
             }, 2000);
             return;
         }
-
+        
         setTimeout(async () => {
             let cookies = await UserSessions.findAll(); 
             res.status(201).send({user:user, sess: cookies[cookies.length - 1]})
         }, 2000);
         return;
     } 
+
     const sessIndex = ck.findIndex((cookie)=> {
         return cookie.indexOf(ck.includes(user.User_ID));
     })
+    if(authType === 'Oauth') {
+        setTimeout(async () => {
+            const sessions = await UserSessions.findAll();
+            res.redirect(`${process.env.FRONTEND_URL}/Oauth/${sessions[sessIndex].sid}`)
+        }, 2000);
+        return;
+    }
     res.status(201).send({user: user, sess: sessions[sessIndex]})
 }
 

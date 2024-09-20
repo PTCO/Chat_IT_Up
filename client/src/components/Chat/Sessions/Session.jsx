@@ -31,7 +31,7 @@ const Session = ({reload, Session }) => {
                     <h1 className={`mb-0 ${darkMode ? 'text-white':null}`}>{ Session.Username }</h1>
                 </Link>
                 <p className={`${notifications.length === 0 ? 'd-none':null} m-0 ms-auto me-3 bg-dark text-white  p-2 px-3 rounded-circle`}>{notifications.length ? notifications.length:0}</p>
-                <i className="fa-solid fa-ellipsis-vertical fa-xl border py-3 px-2 rounded" onClick={ e => setSubNav(pre => !pre)}></i>
+                <i className="fa-solid fa-ellipsis-vertical fa-xl border py-3 px-2 rounded btn" onClick={ e => setSubNav(pre => !pre)}></i>
             </div>
             <nav className={`${subNav && !consent ? 'd-flex':'d-none'} mt-2`}>
                 <ul>
