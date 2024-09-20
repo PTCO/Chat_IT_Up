@@ -109,7 +109,8 @@ nav a {
     border-color: #212529 !important;
 }
 
-.refreshBtn:hover {
+.refreshBtn:hover,
+.sessionControlBtn:hover {
     cursor: pointer;
     background: rgb(180 128 251) !important;
     border-color: rgb(180 128 251) !important;
