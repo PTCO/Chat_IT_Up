@@ -66,7 +66,7 @@ const CustomForm =  ({ inputs , legend, button, Size, Oauth}) => {
                     <h5 className="mb-0 ms-2 ms-sm-3 me-1 me-sm-3 fs-6">Or <b style={{color: "#f8b231"}}>Login</b>  <b style={{color: "rgb(180 128 251)"}}>With</b></h5>
                     <div className="border border-2 p-1 rounded d-flex">
                         {Oauth && Oauth.length > 0 && Oauth.map(auth => {
-                            return <a key={auth.icon} className="bg-white d-flex mx-1 mx-md-2  align-items-center " href={`${auth.type === 'google' ? `${REACT_APP_SERVER_URL}User/Google`:`${REACT_APP_SERVER_URL}User/Twitter`}`}><i className={`fa-brands fa-${auth.icon} fa-2x ${auth.type === 'google' ? 'text-danger':'text-info'}`}></i></a>
+                            return <a key={auth.icon} className="bg-white d-flex mx-1 mx-md-2  align-items-center " href={`${auth.type === 'google' ? `${process.env.REACT_APP_SERVER_URL}User/Google`:`${process.env.REACT_APP_SERVER_URL}User/Twitter`}`}><i className={`fa-brands fa-${auth.icon} fa-2x ${auth.type === 'google' ? 'text-danger':'text-info'}`}></i></a>
                         })}
                     </div>
                 </span>
