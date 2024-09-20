@@ -57,7 +57,7 @@ const CustomForm =  ({ inputs , legend, button, Size, Oauth}) => {
                         key={btn.title} 
                         type={btn.type} 
                         onClick={ e => `${btn.path ? navigate(btn.path) : null}`} 
-                        className="btn btn-dark mt-2 w-100 me-md-2">
+                        className="btn btn-dark mt-2 w-100">
                         { btn.title }
                     </button>
                 ))}

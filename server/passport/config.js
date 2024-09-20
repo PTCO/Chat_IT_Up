@@ -9,7 +9,7 @@ require('dotenv').config();
 const googleStrategyOptions = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/User/Google/Callback"
+    callbackURL: `${process.env.BACKEND_URL}User/Google/Callback`
 }
 
 passport.use(new googleStrategy(googleStrategyOptions, async(accessToken, refreshToken, profile, done) => {
@@ -37,7 +37,7 @@ const twitterStrategyOptions = {
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
     includeEmail: true,
-    callbackURL: "http://localhost:5000/User/Twitter/Callback"
+    callbackURL: `${process.env.BACKEND_URL}User/Twitter/Callback`
 }
 
 passport.use(new twitterStrategy(twitterStrategyOptions, async(token, tokenSecret, profile, done) => {

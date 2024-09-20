@@ -11,13 +11,13 @@ const passport = require('passport');
 const googleScope = {
     scope: ['profile', 'email'],
     session: false,
-    failureRedirect: "https://chatitup.vercel.app/SignIn"
+    failureRedirect: `${process.env.FRONTEND_URL}SignIn`
 }
 
 const twitterScope = {
     scope: ['users.read', 'offline.access'],
     session: false,
-    failureRedirect: "https://chatitup.vercel.app/SignIn"
+    failureRedirect: `${process.env.FRONTEND_URL}SignIn`
 }
 
 // Middleware
@@ -37,7 +37,7 @@ const findCookie = async(req, res, user, authType) => {
         if(authType === 'Oauth') {
             setTimeout(async () => {
                 const sessions = await UserSessions.findAll();
-                res.redirect(`http://localhost:3000/Oauth/${sessions[sessions.length - 1].sid}`)
+                res.redirect(`${process.env.FRONTEND_URL}Oauth/${sessions[sessions.length - 1].sid}`)
             }, 2000);
             return;
         }
