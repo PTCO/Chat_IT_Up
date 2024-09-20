@@ -16,8 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  // origin: 'https://chatitup.vercel.app',
-  origin: 'http://localhost:3000',
+  origin: `${process.env.FRONTEND_URL}`,
   credentials: true
 }));
 
@@ -70,7 +69,6 @@ app.use(function(err, req, res, next) {
   // Sequelize Error Handling
   if(err.name === 'SequelizeValidationError' || err.name === 'SequelizeUniqueConstraintError') {
     const errors = err.errors.map( err => err.message);
-    console.log(errors)
     return res.status(400).send(errors);
   }
 
