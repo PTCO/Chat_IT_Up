@@ -9,6 +9,8 @@ const Header = () => {
     const { accentColor, darkMode} = useContext(ThemeContext);
     const location = useLocation();
 
+    console.log(authUser);
+
     return (
         <header style={{backgroundColor: `${accentColor}`}} className={`${location.pathname.includes('/Chat/Session') ? 'd-none':'d-flex '} align-items-center justify-content-between py-1 py-md-4 px-2 mb-2`}>
             <span className={` ${ darkMode ? 'text-white':null} d-flex align-items-center`}>
