@@ -15,7 +15,7 @@ const Header = () => {
                 {authUser ?
                 <>
                     <img className="userPortrait border border-2 rounded-circle me-2" src={authUser.Portrait} alt="" />
-                    <h1 className="mb-0 text-white fw-bold">{authUser ? authUser.Username.substring(0, 5):''}<b style={{color: "#111"}}>{authUser ? authUser.Username.substring(5, 8):''}</b><b style={{color: "#f8b231"}}>{authUser ? authUser.Username.substring(8, 15):''}</b></h1>
+                    <h1 className={`${authUser ? null:'d-none'} mb-0 text-white fw-bold`}>{authUser ? authUser.Username.substring(0, 5):''}<b style={{color: "#111"}}>{authUser ? authUser.Username.substring(5, 8):''}</b><b style={{color: "#f8b231"}}>{authUser ? authUser.Username.substring(8, 15):''}</b></h1>
                 </>
                 :
                 <>
