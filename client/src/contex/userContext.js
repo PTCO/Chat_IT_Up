@@ -23,7 +23,7 @@ export const UserProvider = (props) => {
             navigate('/SignIn')
         }
         else if(errors.response.status === 401) {
-            Cookie.remove('usc')
+            Cookie.remove('ucs')
             navigate('/Unauthorized')
         }
         else {
@@ -32,7 +32,7 @@ export const UserProvider = (props) => {
     }
 
     const userCheck = async () => {
-        const session = JSON.stringify(Cookie.get('usc')).substring(3, 35);
+        const session = JSON.stringify(Cookie.get('ucs')).substring(3, 35);
         await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Check`, {session})
         .then( result => {
             setAuthUser(result.data);
@@ -44,7 +44,7 @@ export const UserProvider = (props) => {
     }
     
     useEffect(()=>{
-        if(!Cookie.get('usc')) return
+        if(!Cookie.get('ucs')) return
         navigate('/Loading') 
         userCheck()
     }, [])
@@ -54,7 +54,7 @@ export const UserProvider = (props) => {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}User/SignIn`, {formData: data})
         .then( result => {
             setAuthUser(result.data.user);
-            Cookie.set('usc', JSON.stringify(result.data.sess.sid), {secure: true, sameSite: 'Strict', expires: 7 * 24 * 60 * 60 * 1000})
+            Cookie.set('ucs', JSON.stringify(result.data.sess.sid), {secure: true, sameSite: 'Strict', expires: 7 * 24 * 60 * 60 * 1000})
             navigate('/Chat');
         })
         .catch( errors => {
@@ -67,7 +67,7 @@ export const UserProvider = (props) => {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}User/Signup`, {formData: data})
         .then( result => {
             setAuthUser(result.data.user);
-            Cookie.set('usc', JSON.stringify(result.data.sess.sid), {secure: true, sameSite: 'Strict', expires: 7 * 24 * 60 * 60 * 1000})
+            Cookie.set('ucs', JSON.stringify(result.data.sess.sid), {secure: true, sameSite: 'Strict', expires: 7 * 24 * 60 * 60 * 1000})
             navigate('/Chat');
         })
         .catch(errors => {
@@ -84,10 +84,10 @@ export const UserProvider = (props) => {
 
     const deleteUser = async (consentMsg) => {
         if(consentMsg !== "Yes, I would like to delete my ChatITUp Account") return setErrors(['Consent message does not match'])
-        await axios.delete(`${process.env.REACT_APP_SERVER_URL}User/Delete/${authUser.User_ID}/${JSON.stringify(Cookie.get('usc')).substring(3, 35)}`)
+        await axios.delete(`${process.env.REACT_APP_SERVER_URL}User/Delete/${authUser.User_ID}/${JSON.stringify(Cookie.get('ucs')).substring(3, 35)}`)
         .then(()=> {
             navigate('/Deletion', {state: "Deleting"})
-            Cookie.remove("usc")
+            Cookie.remove("ucs")
             setAuthUser(null);
             setTimeout(() => {
                 navigate('/SignIn')
@@ -107,10 +107,10 @@ export const UserProvider = (props) => {
     }
 
     const signOut = async () => {
-        await axios.get(`${process.env.REACT_APP_SERVER_URL}User/LogOut/` + JSON.stringify(Cookie.get('usc')).substring(3, 35))
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}User/LogOut/` + JSON.stringify(Cookie.get('ucs')).substring(3, 35))
         .then( () => {
             setAuthUser(null);
-            Cookie.remove('usc')
+            Cookie.remove('ucs')
             navigate('/SignIn')
         })
         .catch(errors => {

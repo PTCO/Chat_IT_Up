@@ -12,7 +12,7 @@ const Oauth = () => {
             actions.navigate('/Login')
             return;
         }
-        Cookie.set('usc', JSON.stringify(sid), {secure: true, sameSite: 'Strict', expires: 7 * 24 * 60 * 60 * 1000});
+        Cookie.set('ucs', JSON.stringify(sid), {secure: true, sameSite: 'Strict', expires: 7 * 24 * 60 * 60 * 1000});
         if(authUser) {
             actions.navigate('/Chat')
         }
